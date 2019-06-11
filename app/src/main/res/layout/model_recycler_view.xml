@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="115dp"
+    >
+
+    <android.support.v7.widget.CardView
+        android:layout_margin="3dp"
+        app:cardBackgroundColor="#f7f4ea"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="115dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="115dp">
+
+
+            <ImageView
+                android:src="@drawable/war"
+                android:scaleType="fitXY"
+                android:id="@+id/image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:lines="1"
+                android:gravity="center_vertical|right"
+                android:textSize="14sp"
+                android:layout_toLeftOf="@+id/image"
+                android:layout_marginRight="15dp"
+                android:text="عنوان مطلب"
+                android:layout_marginTop="15dp"
+                android:textColor="#4139cc"
+                />
+
+
+            <TextView
+                android:id="@+id/date_tx"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:lines="1"
+                android:gravity="center_vertical|right"
+                android:textSize="12sp"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="15dp"
+                android:text=" 12 خرداد 1398 "
+                android:layout_marginTop="15dp"
+                android:textColor="#fbd31c"
+                />
+
+            <TextView
+                android:textColor="#4139cc"
+                android:gravity="right|top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                 android:id="@+id/content"
+                android:textSize="10dp"
+                android:layout_toLeftOf="@+id/image"
+                android:layout_below="@+id/title"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:text="داستان بلند به گونه‌ای از داستان‌ها گفته می‌شود که خصوصیات رمان و داستان کوتاه را هر دو در خود داشته باشد. در داستان بلند درست مانند داستان کوتاه معنا از اهمیت بالایی برخوردار بوده و فشردگی معنایی وجود دارد. همچنین شخصیت‌ها و زمان پیوسته در حرکت هستند، تمامی شخصیت‌ها به صورتی هماهنگ در جهت تصویر معناهای اصلی داستان نقش آفرینی می‌کنند و پیرنگ نیز از استحکام و انسجام بالایی برخوردار است. حال اینکه داستان بلند همچون رمان، شخصیت‌ها را گسترش نمی‌دهد و اما موضوع نیز بیشتر از وضعیتی که در داستان کوتاه دارد در آن گسترده می‌گردد. پرورش شخصیت و معنا در داستان بلند بیشتر از داستان کوتاه صورت می‌پذیرد و تا اندازه‌ای به خصوصیات رمان نزدیک می‌شود. "
+                android:lines="4"
+                android:lineSpacingExtra="3dp"
+                android:ellipsize="end"
+                />
+
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
