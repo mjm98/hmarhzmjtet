@@ -1,5 +1,6 @@
 package mandh.ir.myapplication.activitys;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -11,14 +12,19 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import mandh.ir.myapplication.adapters.fragmentPagerAdapter.PagerAdapter_homeActivity;
 import mandh.ir.myapplication.R;
 
 import static mandh.ir.myapplication.forHelp.G.context;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     TabLayout bottomTabLayout;
     TabLayout topTabLayout;
@@ -26,6 +32,8 @@ public class HomeActivity extends AppCompatActivity {
     TextView title;
     Button qrButton;
     EditText searchEtx;
+    RelativeLayout qr_bt;
+    IntentIntegrator qrScan;
 
     static HomeActivity mainActivity;
     public static HomeActivity getMainActivity() {
@@ -43,7 +51,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         cast();
-
+        qr_bt.setOnClickListener(this);
         setTYpeFaces();
 
         setTopTabLatout();
@@ -75,6 +83,8 @@ public class HomeActivity extends AppCompatActivity {
         title = (TextView) findViewById(R.id.title);
         qrButton =(Button) findViewById(R.id.qr_button);
         searchEtx = (EditText) findViewById(R.id.edit_text);
+        qr_bt=(RelativeLayout) findViewById(R.id.qr_layout);
+        qrScan = new IntentIntegrator(this);
     }
 
 
@@ -245,4 +255,34 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onClick(View view) {
+
+        qrScan.setBeepEnabled(false);
+
+        qrScan.setCameraId(0);
+        qrScan.setOrientationLocked(false);
+        qrScan.setPrompt("لطفا دوربین را بر روی بارکد بگیرید ");
+        qrScan.initiateScan();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            if (result.getContents() == null) {
+                Toast.makeText(this, "Result Not Found", Toast.LENGTH_LONG).show();
+            } else {
+                try {
+                    String s=result.getContents();
+                    Toast.makeText(this,s,Toast.LENGTH_LONG).show();
+                }catch (Exception e){
+                    Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
 }
