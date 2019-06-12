@@ -25,6 +25,8 @@ public class Model {
 
     public Model( String name, String imageUrl) {
 
+        
+
         this.name = name;
         this.imageUrl = imageUrl;
     }

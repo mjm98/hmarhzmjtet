@@ -30,10 +30,11 @@ public class homeGRadeViewFragment extends Fragment     {
 
 
     GridView gridview;
-    ArrayList<Model> arrayList;
     TextView title;
     Spinner gradeSpinner;
     Spinner sortSpinner;
+    //..............................................................................................
+    ArrayList<Model> arrayList;
 
 
 
@@ -41,7 +42,7 @@ public class homeGRadeViewFragment extends Fragment     {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = null;
-        view = inflater.inflate(R.layout.fragment1, container, false);
+        view = inflater.inflate(R.layout.fragmetn_home_gradview, container, false);
 
         arrayList = new ArrayList<>();
 
@@ -51,7 +52,9 @@ public class homeGRadeViewFragment extends Fragment     {
 
         cast(view);
 
-        setSpinners();
+        setGradeSpinners();
+
+        setSortSpinners();
 
         setTypeFaces();
 
@@ -97,6 +100,8 @@ public class homeGRadeViewFragment extends Fragment     {
 
     }
 
+
+
     private void setTypeFaces() {
 
         Typeface myTypeface = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileBold.ttf");
@@ -113,16 +118,7 @@ public class homeGRadeViewFragment extends Fragment     {
 
     }
 
-    private void setSpinners() {
-
-
-        Model  modelS0 = new Model("مرتب سازی");
-        Model  modelS1 = new Model(2,"صعودی");
-        Model  modelS2 = new Model(1,"نزولی");
-        ArrayList<Model> sortSpinnerArray = new ArrayList<>() ;
-        sortSpinnerArray.add(modelS0);
-        sortSpinnerArray.add(modelS1);
-        sortSpinnerArray.add(modelS2);
+    private void setGradeSpinners() {
 
         Model  modelG0 = new Model("مقاطع تحصیلی");
         Model  modelG1 = new Model(2,"دوم");
@@ -134,11 +130,23 @@ public class homeGRadeViewFragment extends Fragment     {
 
         ArrayAdapter<Model> gradeSpinnerArrayAdapter = new ArrayAdapter< >(getActivity(), android.R.layout.simple_spinner_item, gradeSpinnerArray);
 
-        ArrayAdapter<Model> sortSpinnerArrayAdapter = new ArrayAdapter< >(getActivity(), android.R.layout.simple_spinner_item, sortSpinnerArray);
-
-
         gradeSpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         gradeSpinner.setAdapter(gradeSpinnerArrayAdapter);
+
+
+    }
+
+    private void setSortSpinners() {
+
+        Model  modelS0 = new Model("مرتب سازی");
+        Model  modelS1 = new Model(2,"صعودی");
+        Model  modelS2 = new Model(1,"نزولی");
+        ArrayList<Model> sortSpinnerArray = new ArrayList<>() ;
+        sortSpinnerArray.add(modelS0);
+        sortSpinnerArray.add(modelS1);
+        sortSpinnerArray.add(modelS2);
+
+        ArrayAdapter<Model> sortSpinnerArrayAdapter = new ArrayAdapter< >(getActivity(), android.R.layout.simple_spinner_item, sortSpinnerArray);
 
         sortSpinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortSpinner.setAdapter(sortSpinnerArrayAdapter);
@@ -158,7 +166,6 @@ public class homeGRadeViewFragment extends Fragment     {
 
         HomeGradeView_Adapter gradeView = new HomeGradeView_Adapter(arrayList);
         gridview.setAdapter(gradeView);
-
 
 
     }

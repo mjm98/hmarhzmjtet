@@ -23,10 +23,12 @@ public class HomeRecyclerView_adapter extends RecyclerView.Adapter<HomeRecyclerV
 
     //..............................................................................................
     Model model;
-
     //..............................................................................................
     private ArrayList<Model> arrayList = new ArrayList<>();
     //..............................................................................................
+    Typeface myTypeface = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileMedium.ttf");
+    Typeface myTypeface2 = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileBold.ttf");
+
 
 
 
@@ -37,38 +39,25 @@ public class HomeRecyclerView_adapter extends RecyclerView.Adapter<HomeRecyclerV
     }
 
 
-
     @Override
     public classes_list_holder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.model_recycler_view,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.model_home_recyclerview,parent,false);
         return new classes_list_holder(view);
     }
-
-
 
 
     @Override
     public void onBindViewHolder(classes_list_holder holder, int position) {
 
-
-
         model= arrayList.get(position);
 
-       // holder.name.setText(model.getName());
-       // holder.name.setTypeface(myTypeface);
-
-
-
-        Typeface myTypeface = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileMedium.ttf");
-        Typeface myTypeface2 = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileBold.ttf");
 
         holder.date.setTypeface(myTypeface);
         holder.title.setTypeface(myTypeface2);
         holder.content.setTypeface(myTypeface);
 
-       // holder.layout.setId(model.getId());
-
-       /* holder.layout.setOnClickListener(new View.OnClickListener() {
+    /* holder.layout.setId(model.getId());
+       holder.layout.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -82,27 +71,17 @@ public class HomeRecyclerView_adapter extends RecyclerView.Adapter<HomeRecyclerV
     }
 
 
-
-
     @Override
     public int getItemCount() {
         return arrayList.size();
     }
 
 
-
-
     public class classes_list_holder extends RecyclerView.ViewHolder {
 
-        //..............................................................................................
-
-       TextView title;
+        TextView title;
         TextView date;
         TextView content;
-
-        //
-
-        //..............................................................................................
 
         public classes_list_holder(View itemView) {
 

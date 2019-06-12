@@ -12,7 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import mandh.ir.myapplication.forHelp.G;
@@ -34,8 +33,14 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
 
 
     ArrayList<Model> arrayList = new ArrayList<>();
+    //..............................................................................................
     private LayoutInflater mInflaterCatalogListItems;
+    //..............................................................................................
     Model model;
+    //..............................................................................................
+    Typeface myTypeface = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileBold.ttf");
+    Typeface myTypeface2 = Typeface.createFromAsset(context.getAssets(), "font/yekan.ttf");
+    //..............................................................................................
 
 
     public ShowContentGradeView_Adapter(ArrayList<Model> array) {
@@ -69,7 +74,7 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
         if (convertView == null) {
 
             holder = new ViewHolder();
-            convertView = mInflaterCatalogListItems.inflate(R.layout.model_categoury2, null);
+            convertView = mInflaterCatalogListItems.inflate(R.layout.model_show_content_gradeview, null);
             holder.name = (TextView) convertView.findViewById(R.id.name);
             holder.name2 = (TextView) convertView.findViewById(R.id.name2);
             holder.imageView=(ImageView) convertView.findViewById(R.id.im);
@@ -82,25 +87,19 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
         }
 
 
-        //Change the content here
-        if (arrayList.get(position) != null) {
+        ////////////////////////////////////Change the content here/////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////
 
-            Typeface myTypeface = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileBold.ttf");
-            Typeface myTypeface2 = Typeface.createFromAsset(context.getAssets(), "font/yekan.ttf");
+        model=arrayList.get(position);
+        if (model != null) {
 
-
-
-            model=arrayList.get(position);
-            holder.name2.setText(model.getName());
-            holder.name2.setTypeface(myTypeface);
-
-            holder.name.setTypeface(myTypeface2);
 
             if (!model.getImageUrl().isEmpty())
-            holder.imageView.setImageResource(Integer.parseInt(model.getImageUrl()));
+                holder.imageView.setImageResource(Integer.parseInt(model.getImageUrl()));
 
-
-
+            holder.name2.setText(model.getName());
+            holder.name2.setTypeface(myTypeface);
+            holder.name.setTypeface(myTypeface2);
 
             holder.cardView.setId(model.getId());
             holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +121,7 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
         return convertView;
     }
 
-    //View Holder class used for reusing the same inflated view. It will decrease the inflation overhead @getView
+
     private static class ViewHolder {
         TextView name;
         TextView name2;
@@ -133,14 +132,5 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
     }
 
 
-    public static String Encrypt(String text) throws UnsupportedEncodingException {
-      //  return URLEncoder.encode(text, "utf-8");
-
-
-        return  text.replace("http","https");
-
-
-
-    }
 
 }

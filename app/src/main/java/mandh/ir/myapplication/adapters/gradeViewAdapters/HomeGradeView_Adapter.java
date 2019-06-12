@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import mandh.ir.myapplication.forHelp.G;
@@ -32,7 +31,9 @@ public class HomeGradeView_Adapter extends BaseAdapter {
 
 
     ArrayList<Model> arrayList = new ArrayList<>();
+    //..............................................................................................
     private LayoutInflater mInflaterCatalogListItems;
+    //..............................................................................................
     Model model;
 
 
@@ -67,7 +68,7 @@ public class HomeGradeView_Adapter extends BaseAdapter {
         if (convertView == null) {
 
             holder = new ViewHolder();
-            convertView = mInflaterCatalogListItems.inflate(R.layout.model_categoury, null);
+            convertView = mInflaterCatalogListItems.inflate(R.layout.model_home_gradeview_, null);
             holder.name = (TextView) convertView.findViewById(R.id.name);
             holder.imageView=(ImageView) convertView.findViewById(R.id.im);
             holder.cardView=(RelativeLayout) convertView.findViewById(R.id.layout);
@@ -79,21 +80,18 @@ public class HomeGradeView_Adapter extends BaseAdapter {
         }
 
 
+        ////////////////////////////////////Change the content here/////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////
+
         model=arrayList.get(position) ;
-        //Change the content here
         if (model != null) {
-
-
-            model=arrayList.get(position);
-            holder.name.setText(model.getName());
 
             if (!model.getImageUrl().isEmpty())
             holder.imageView.setImageResource(Integer.parseInt(model.getImageUrl()));
 
             Typeface myTypeface = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileMedium.ttf");
+            holder.name.setText(model.getName());
             holder.name.setTypeface(myTypeface);
-
-
 
             holder.cardView.setId(model.getId());
             holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +114,7 @@ public class HomeGradeView_Adapter extends BaseAdapter {
         return convertView;
     }
 
-    //View Holder class used for reusing the same inflated view. It will decrease the inflation overhead @getView
+
     private static class ViewHolder {
         TextView name;
         RelativeLayout layout;
@@ -126,14 +124,5 @@ public class HomeGradeView_Adapter extends BaseAdapter {
     }
 
 
-    public static String Encrypt(String text) throws UnsupportedEncodingException {
-      //  return URLEncoder.encode(text, "utf-8");
-
-
-        return  text.replace("http","https");
-
-
-
-    }
 
 }
