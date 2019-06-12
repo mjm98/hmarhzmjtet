@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import mandh.ir.myapplication.forHelp.G;
+import mandh.ir.myapplication.models.Book;
 import mandh.ir.myapplication.models.Model;
 import mandh.ir.myapplication.R;
 import mandh.ir.myapplication.activitys.HomeActivity;
@@ -30,14 +31,14 @@ public class HomeGradeView_Adapter extends BaseAdapter {
 
 
 
-    ArrayList<Model> arrayList = new ArrayList<>();
+    ArrayList<Book> arrayList = new ArrayList<>();
     //..............................................................................................
     private LayoutInflater mInflaterCatalogListItems;
     //..............................................................................................
-    Model model;
+    Book model;
 
 
-    public HomeGradeView_Adapter(ArrayList<Model> array) {
+    public HomeGradeView_Adapter(ArrayList<Book> array) {
 
         arrayList = array;
         mInflaterCatalogListItems = (LayoutInflater) G.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -86,11 +87,11 @@ public class HomeGradeView_Adapter extends BaseAdapter {
         model=arrayList.get(position) ;
         if (model != null) {
 
-            if (!model.getImageUrl().isEmpty())
-            holder.imageView.setImageResource(Integer.parseInt(model.getImageUrl()));
+            if (model.getImageurl()!=0)
+            holder.imageView.setImageResource(model.getImageurl());
 
             Typeface myTypeface = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileMedium.ttf");
-            holder.name.setText(model.getName());
+            holder.name.setText(model.getTitle());
             holder.name.setTypeface(myTypeface);
 
             holder.cardView.setId(model.getId());
@@ -100,7 +101,7 @@ public class HomeGradeView_Adapter extends BaseAdapter {
 
                     Intent intent = new Intent(G.context, ShowContentActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra("name", arrayList.get(position).getName());
+                    intent.putExtra("id", arrayList.get(position).getId());
                     G.context.startActivity(intent);
                     HomeActivity.getMainActivity().overridePendingTransition(R.anim.a_fade_in, R.anim.a_fade_out);
 

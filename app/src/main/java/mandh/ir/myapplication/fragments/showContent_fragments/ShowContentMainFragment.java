@@ -25,18 +25,21 @@ public class ShowContentMainFragment extends Fragment     {
 
 
 
-
     GridView gridview;
     TextView title  ;
     TextView number ;
     //..............................................................................................
     ArrayList<Model> arrayList;
+    int bookid;
+
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = null;
+        bookid=getArguments().getInt("id", 0);
         view = inflater.inflate(R.layout.fragment_main_show_content, container, false);
 
         gridview = (GridView) view.findViewById(R.id.gridView);
@@ -102,7 +105,7 @@ public class ShowContentMainFragment extends Fragment     {
 
     private void setGradeView() {
 
-        ShowContentGradeView_Adapter gradeView = new ShowContentGradeView_Adapter(arrayList);
+        ShowContentGradeView_Adapter gradeView = new ShowContentGradeView_Adapter(arrayList,bookid);
         gridview.setAdapter(gradeView);
 
     }

@@ -55,20 +55,40 @@
                     android:layout_centerHorizontal="true"
 
                     />
-
-                <TextView
+                <LinearLayout
                     android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_centerHorizontal="true">
+
+                    <TextView
+                        android:layout_above="@+id/lay"
+                        android:textColor="#4c44da"
+                        android:layout_width="wrap_content"
+                        android:gravity="center"
+                        android:layout_height="match_parent"
+                        android:text=" 0"
+                        android:id="@+id/num"
+                        android:textSize="8dp"
+
+
+                        />
+                <TextView
                     android:layout_above="@+id/lay"
                     android:textColor="#4c44da"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:gravity="center"
                     android:layout_height="match_parent"
-                    android:text="دریافت شده : 0"
+                    android:text="دریافت شده : "
                     android:id="@+id/name"
                     android:textSize="8dp"
-                    android:layout_centerHorizontal="true"
+
 
                     />
+
+                </LinearLayout>
 
             </LinearLayout>
 

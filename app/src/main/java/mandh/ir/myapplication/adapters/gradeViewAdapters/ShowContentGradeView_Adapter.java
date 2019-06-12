@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -18,6 +19,7 @@ import mandh.ir.myapplication.forHelp.G;
 import mandh.ir.myapplication.models.Model;
 import mandh.ir.myapplication.R;
 import mandh.ir.myapplication.activitys.ShowContentActivity;
+import mandh.ir.myapplication.models.StaticsData;
 
 import static mandh.ir.myapplication.forHelp.G.context;
 
@@ -30,7 +32,7 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
 
 
 
-
+    int bookid;
 
     ArrayList<Model> arrayList = new ArrayList<>();
     //..............................................................................................
@@ -43,8 +45,8 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
     //..............................................................................................
 
 
-    public ShowContentGradeView_Adapter(ArrayList<Model> array) {
-
+    public ShowContentGradeView_Adapter(ArrayList<Model> array,int bookid) {
+        this.bookid=bookid;
         arrayList = array;
         mInflaterCatalogListItems = (LayoutInflater) G.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -79,6 +81,7 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
             holder.name2 = (TextView) convertView.findViewById(R.id.name2);
             holder.imageView=(ImageView) convertView.findViewById(R.id.im);
             holder.cardView=(LinearLayout) convertView.findViewById(R.id.layout);
+            holder.num=(TextView) convertView.findViewById(R.id.num);
 
             convertView.setTag(holder);
 
@@ -99,7 +102,18 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
 
             holder.name2.setText(model.getName());
             holder.name2.setTypeface(myTypeface);
+
             holder.name.setTypeface(myTypeface2);
+            holder.num.setTypeface(myTypeface2);
+             switch (position){
+                case 0: holder.num.setText(String.valueOf(StaticsData.books.get(bookid).getNumberOfVoices())); break;
+                case 1: holder.num.setText(String.valueOf(StaticsData.books.get(bookid).getNumberOfVideos()));break;
+                case 2: holder.num.setText(String.valueOf(StaticsData.books.get(bookid).getNumberOfPages()));break;
+                case 3: holder.num.setText(String.valueOf(StaticsData.books.get(bookid).getNumberOfFiles()));break;
+                case 4: holder.num.setText(String.valueOf(StaticsData.books.get(bookid).getNumberOfdocs()));break;
+                case 5: holder.num.setText(String.valueOf(StaticsData.books.get(bookid).getNumberOf3d()));break;
+
+            }
 
             holder.cardView.setId(model.getId());
             holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -108,7 +122,7 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
 
                     Intent intent = new Intent(G.context, ShowContentActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra("name", arrayList.get(position).getName());
+                    intent.putExtra("id", arrayList.get(position).getId());
                     G.context.startActivity(intent);
 
 
@@ -128,6 +142,7 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
         RelativeLayout layout;
         ImageView imageView;
         LinearLayout cardView;
+        TextView num;
 
     }
 

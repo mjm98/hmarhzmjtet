@@ -14,10 +14,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import mandh.ir.myapplication.adapters.gradeViewAdapters.HomeGradeView_Adapter;
+import mandh.ir.myapplication.models.Book;
 import mandh.ir.myapplication.models.Model;
 import mandh.ir.myapplication.R;
+import mandh.ir.myapplication.models.StaticsData;
 
 import static mandh.ir.myapplication.forHelp.G.context;
 
@@ -34,7 +37,7 @@ public class homeGRadeViewFragment extends Fragment     {
     Spinner gradeSpinner;
     Spinner sortSpinner;
     //..............................................................................................
-    ArrayList<Model> arrayList;
+    ArrayList<Book> arrayList;
 
 
 
@@ -45,12 +48,13 @@ public class homeGRadeViewFragment extends Fragment     {
         view = inflater.inflate(R.layout.fragmetn_home_gradview, container, false);
 
         arrayList = new ArrayList<>();
+        cast(view);
 
         createData();
 
         setGradeView();
 
-        cast(view);
+
 
         setGradeSpinners();
 
@@ -111,9 +115,22 @@ public class homeGRadeViewFragment extends Fragment     {
 
     private void createData() {
 
-        for (int i = 0 ;i<2500; i++){
-            Model model = new Model("کتاب"+String.valueOf(i));
-            arrayList.add(model);
+
+
+
+
+
+        for (int i = 0; i< StaticsData.booksimages.length; i++){
+            Book book=new Book(StaticsData.booksimages[i],StaticsData.booksnames[i],i);
+            Random random=new Random();
+            book.setNumberOfVoices(random.nextInt(50));
+            book.setNumberOf3d(random.nextInt(40));
+            book.setNumberOfdocs(random.nextInt(20));
+            book.setNumberOfFiles(random.nextInt(35));
+            book.setNumberOfPages(random.nextInt(24));
+            book.setNumberOfVideos(random.nextInt(12));
+            arrayList.add(book);
+            StaticsData.setBooks(arrayList);
         }
 
     }

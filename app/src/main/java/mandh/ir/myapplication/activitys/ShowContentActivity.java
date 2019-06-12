@@ -25,6 +25,7 @@ public class ShowContentActivity extends AppCompatActivity {
     ViewPager viewPager;
     Button codeButton;
     EditText searchEtx;
+    int bookid;
 
 
 
@@ -35,6 +36,7 @@ public class ShowContentActivity extends AppCompatActivity {
         //remove statusBar (notification bar)
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_show_content);
+        bookid = getIntent().getExtras().getInt("id");
 
         cast();
 
@@ -75,7 +77,7 @@ public class ShowContentActivity extends AppCompatActivity {
         topTabLayout.addTab(topTabLayout.newTab().setText("ذخیره شده ها"));
 
         //create an adapter
-        final PagerAdapter_showContentActivity adapter = new PagerAdapter_showContentActivity(getSupportFragmentManager(), topTabLayout.getTabCount());
+        final PagerAdapter_showContentActivity adapter = new PagerAdapter_showContentActivity(getSupportFragmentManager(), topTabLayout.getTabCount(),bookid);
 
         //setting viewPager
         viewPager.setAdapter(adapter);

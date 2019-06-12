@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import mandh.ir.myapplication.adapters.recyclerViewAdapters.HomeRecyclerView_adapter;
 import mandh.ir.myapplication.models.Model;
 import mandh.ir.myapplication.R;
+import mandh.ir.myapplication.models.StaticsData;
+import mandh.ir.myapplication.models.Subject;
 
 import static mandh.ir.myapplication.forHelp.G.context;
 
@@ -35,7 +37,7 @@ public class HomeRecyclerViewFragment extends Fragment   {
     TextView title;
     RecyclerView recyclerView;
     //..............................................................................................
-    ArrayList<Model> arrayList;
+    ArrayList<Subject> arrayList;
 
 
     @Override
@@ -158,15 +160,15 @@ public class HomeRecyclerViewFragment extends Fragment   {
 
     private void createData() {
 
-        for (int i = 0 ;i<2500; i++){
-            Model model = new Model("کتاب"+String.valueOf(i));
-            arrayList.add(model);
+        for (int i = 0; i< StaticsData.subjects.length; i++){
+            Subject subject=new Subject(StaticsData.booksnames[i],StaticsData.subjects[i],StaticsData.booksimages[i]);
+            arrayList.add(subject);
         }
 
     }
 
     private void cast(View view) {
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         title =(TextView) view.findViewById(R.id.title);
         gradeSpinner=(Spinner) view.findViewById(R.id.grade_spinner);
         sortSpinner=(Spinner) view.findViewById(R.id.sort_spinner);
