@@ -11,10 +11,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import mandh.ir.myapplication.activitys.SoundListActivity;
+import mandh.ir.myapplication.activitys.MovieListActivity;
 import mandh.ir.myapplication.forHelp.G;
 import mandh.ir.myapplication.models.Model;
 import mandh.ir.myapplication.R;
@@ -113,17 +114,34 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
                 case 4: holder.num.setText(String.valueOf(StaticsData.books.get(bookid).getNumberOfdocs()));break;
                 case 5: holder.num.setText(String.valueOf(StaticsData.books.get(bookid).getNumberOf3d()));break;
 
+
             }
 
-            holder.cardView.setId(model.getId());
+            holder.cardView.setId(position);
+
             holder.cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
-                    Intent intent = new Intent(G.context, ShowContentActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra("id", arrayList.get(position).getId());
-                    G.context.startActivity(intent);
+                    Model model=arrayList.get(view.getId());
+                    int id = model.getId();
+                    Intent intent = null;
+
+                    if (id==1) {
+                        intent = new Intent(G.context, SoundListActivity.class);
+                    }
+
+                    if (id==3) {
+                        intent = new Intent(G.context, MovieListActivity.class);
+                    }
+
+                    if (intent!=null) {
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("id", arrayList.get(position).getId());
+                        G.context.startActivity(intent);
+                        ShowContentActivity.getShowContentActivity().overridePendingTransition(R.anim.a_fade_in, R.anim.a_fade_out);
+
+                    }
 
 
                 }

@@ -77,12 +77,12 @@ public class ShowContentMainFragment extends Fragment     {
 
     private void createGradeViewData() {
 
-        Model model1 = new Model("محتوای صوتی");
-        Model model2 = new Model("محتوای تصویری");
-        Model model3 = new Model("محتوای ویدیویی");
-        Model model4 = new Model("محتوای فایلی");
-        Model model5 = new Model("محتوای 3بعدی");
-        Model model6 = new Model("محتوای متنی");
+        Model model1 = new Model(1,"محتوای صوتی");
+        Model model2 = new Model(2,"محتوای تصویری");
+        Model model3 = new Model(3,"محتوای ویدیویی");
+        Model model4 = new Model(4,"محتوای فایلی");
+        Model model5 = new Model(5,"محتوای 3بعدی");
+        Model model6 = new Model(6,"محتوای متنی");
 
         arrayList.add(model1);
         arrayList.add(model2);

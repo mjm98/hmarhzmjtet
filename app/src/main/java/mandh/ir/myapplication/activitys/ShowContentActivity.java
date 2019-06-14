@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Explode;
+import android.transition.Fade;
+import android.transition.Slide;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -27,11 +30,16 @@ public class ShowContentActivity extends AppCompatActivity {
     EditText searchEtx;
     int bookid;
 
+    public static ShowContentActivity showContentActivity;
 
+    public static ShowContentActivity getShowContentActivity() {
+        return showContentActivity;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        showContentActivity=this;
 
         //remove statusBar (notification bar)
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -114,7 +122,7 @@ public class ShowContentActivity extends AppCompatActivity {
             }
         });
 
-        setTablaouyTitleTypeFaces(bottomTabLayout);
+        setTablaouyTitleTypeFaces(topTabLayout);
     }
 
 
@@ -229,4 +237,6 @@ public class ShowContentActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.a_fade_in, R.anim.a_fade_out);
 
     }
+
+
 }

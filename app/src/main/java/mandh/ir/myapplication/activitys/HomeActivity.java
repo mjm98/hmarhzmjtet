@@ -1,10 +1,16 @@
 package mandh.ir.myapplication.activitys;
 
+import android.Manifest;
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -21,7 +27,10 @@ import com.google.zxing.integration.android.IntentResult;
 
 import mandh.ir.myapplication.adapters.fragmentPagerAdapter.PagerAdapter_homeActivity;
 import mandh.ir.myapplication.R;
+import mandh.ir.myapplication.adapters.gradeViewAdapters.HomeGradeView_Adapter;
+import mandh.ir.myapplication.forHelp.G;
 
+import static java.security.AccessController.getContext;
 import static mandh.ir.myapplication.forHelp.G.context;
 
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
@@ -140,7 +149,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        setTablaouyTitleTypeFaces(bottomTabLayout);
+        setTablaouyTitleTypeFaces(topTabLayout);
 
     }
 
@@ -260,10 +269,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
         qrScan.setBeepEnabled(false);
 
+
         qrScan.setCameraId(0);
         qrScan.setOrientationLocked(false);
         qrScan.setPrompt("لطفا دوربین را بر روی بارکد بگیرید ");
         qrScan.initiateScan();
+
     }
 
     @Override
@@ -285,4 +296,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
+
 }

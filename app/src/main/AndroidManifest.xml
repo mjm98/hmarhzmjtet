@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="mandh.ir.myapplication">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:name=".forHelp.G"
         android:allowBackup="true"
@@ -10,17 +13,16 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:hardwareAccelerated="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".activitys.HomeActivity"
             android:label="@string/app_name"
-            android:windowSoftInputMode="stateHidden|adjustPan">
-
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
             android:name=".activitys.ShowContentActivity"
             android:windowSoftInputMode="stateHidden|adjustPan" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".activitys.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,10 +30,19 @@
             </intent-filter>
         </activity>
         <activity
+            android:hardwareAccelerated="true"
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="portrait"
-            tools:replace="android:screenOrientation"
-            android:stateNotNeeded="true"/>
+            android:stateNotNeeded="true"
+            tools:replace="android:screenOrientation" />
+        <activity android:name=".activitys.SoundListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
+        <activity
+
+            android:name=".activitys.MovieListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan"></activity>
     </application>
 
 </manifest>

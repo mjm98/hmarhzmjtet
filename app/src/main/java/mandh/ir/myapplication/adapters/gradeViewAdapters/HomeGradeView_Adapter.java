@@ -32,6 +32,11 @@ public class HomeGradeView_Adapter extends BaseAdapter {
 
 
     ArrayList<Book> arrayList = new ArrayList<>();
+
+    public interface ItemClick {
+        public void onClick();
+    }
+    ItemClick itemClick;
     //..............................................................................................
     private LayoutInflater mInflaterCatalogListItems;
     //..............................................................................................
@@ -42,6 +47,7 @@ public class HomeGradeView_Adapter extends BaseAdapter {
 
         arrayList = array;
         mInflaterCatalogListItems = (LayoutInflater) G.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
 
     }
 
@@ -104,6 +110,8 @@ public class HomeGradeView_Adapter extends BaseAdapter {
                     intent.putExtra("id", arrayList.get(position).getId());
                     G.context.startActivity(intent);
                     HomeActivity.getMainActivity().overridePendingTransition(R.anim.a_fade_in, R.anim.a_fade_out);
+
+
 
 
                 }
