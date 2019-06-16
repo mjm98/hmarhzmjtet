@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:background="#000"
+    android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+
+        android:id="@+id/controller2"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:background="#1e243a"
+        android:padding="3dp"
+        android:layout_alignParentBottom="true">
+        <ImageView
+            android:id="@+id/playvideo_btn2"
+            android:layout_margin="1dp"
+            android:layout_weight="8"
+            android:src="@drawable/pause_white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            />
+        <ImageView
+            android:id="@+id/playvideo_stop2"
+            android:layout_margin="1dp"
+            android:layout_weight="8"
+            android:src="@drawable/stop_squre"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            />
+        <SeekBar
+            android:min="0"
+            android:layout_gravity="center"
+            android:id="@+id/videoseekbar2"
+            android:layout_weight="2"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:progressDrawable="@drawable/seekbar2"
+            android:thumb="@drawable/thumb2"/>
+        <ImageView
+            android:id="@+id/settingvideo_btn2"
+            android:layout_margin="1dp"
+            android:layout_weight="8"
+            android:src="@drawable/setting"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/videofullscreen_btn2"
+            android:layout_margin="1dp"
+            android:layout_weight="8"
+            android:src="@drawable/full_screen_out"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+
+
+    </LinearLayout>
+    <VideoView
+        android:layout_centerHorizontal="true"
+        android:foregroundGravity="center"
+        android:id="@+id/video3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/controller2"/>
+
+</RelativeLayout>

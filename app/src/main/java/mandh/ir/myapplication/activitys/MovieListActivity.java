@@ -1,6 +1,7 @@
 package mandh.ir.myapplication.activitys;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -85,8 +86,8 @@ public class MovieListActivity extends Activity {
     }
 
     private void setRecyclerView() {
-
-        MovieListRecyclerView_adapter adapter = new MovieListRecyclerView_adapter(movieList);
+        Intent i=new Intent(MovieListActivity.this,VideoActivity.class);
+        MovieListRecyclerView_adapter adapter = new MovieListRecyclerView_adapter(movieList,i);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);

@@ -128,6 +128,7 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
                     Intent intent = null;
 
                     if (id==1) {
+
                         intent = new Intent(G.context, SoundListActivity.class);
                     }
 

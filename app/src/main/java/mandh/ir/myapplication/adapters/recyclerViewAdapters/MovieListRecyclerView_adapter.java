@@ -1,14 +1,19 @@
 package mandh.ir.myapplication.adapters.recyclerViewAdapters;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import mandh.ir.myapplication.activitys.MovieListActivity;
+import mandh.ir.myapplication.activitys.VideoActivity;
+import mandh.ir.myapplication.forHelp.G;
 import mandh.ir.myapplication.models.Model;
 import mandh.ir.myapplication.R;
 
@@ -29,9 +34,11 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
     Typeface myTypeface = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileMedium.ttf");
     Typeface myTypeface2 = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileBold.ttf");
 
+    Intent i;
 
     //constructor
-    public MovieListRecyclerView_adapter(ArrayList<Model> arrayList ) {
+    public MovieListRecyclerView_adapter(ArrayList<Model> arrayList ,Intent i) {
+        this.i=i;
         this.arrayList =arrayList;
     }
 
@@ -43,24 +50,23 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
 
 
     @Override
-    public void onBindViewHolder(classes_list_holder holder, int position) {
+    public void onBindViewHolder(final classes_list_holder holder, int position) {
 
         model= arrayList.get(position);
 
         holder.title.setTypeface(myTypeface2);
         holder.content.setTypeface(myTypeface);
-
-    /* holder.layout.setId(model.getId());
-       holder.layout.setOnClickListener(new View.OnClickListener() {
+        holder.rl.setId(model.getId());
+        holder.rl.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
-                Toast.makeText(G.context,String.valueOf(v.getId()),Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(G.context,VideoActivity.class);
+                G.context.startActivity(intent);
 
             }
-        });
-        */
+         });
+
     }
 
 
@@ -74,11 +80,12 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
 
         TextView title;
         TextView content;
+        RelativeLayout rl;
 
         public classes_list_holder(View itemView) {
 
             super(itemView);
-
+            rl=(RelativeLayout) itemView.findViewById(R.id.movie_layout);
             title=(TextView) itemView.findViewById(R.id.title);
             content=(TextView) itemView.findViewById(R.id.description);
         }

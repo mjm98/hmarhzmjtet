@@ -59,6 +59,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_home);
 
+
+
         cast();
         qr_bt.setOnClickListener(this);
         setTYpeFaces();

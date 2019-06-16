@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/controller"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="22dp"
+    android:orientation="horizontal"
+    android:background="#1e243a"
+    android:padding="3dp"
+    android:layout_alignParentBottom="true">
+    <Button
+        android:padding="2dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="2dp"
+        android:id="@+id/playvideo_btn"
+        android:layout_margin="1dp"
+        android:layout_weight="8"
+        android:background="@drawable/play_white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+    <Button
+        android:padding="2dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:id="@+id/playvideo_stop"
+        android:layout_margin="1dp"
+        android:layout_weight="8"
+        android:background="@drawable/stop_squre"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        />
+    <SeekBar
+        android:layout_gravity="center"
+        android:id="@+id/videoseekbar"
+        android:layout_weight="2"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:progressDrawable="@drawable/seekbar2"
+        android:thumb="@drawable/thumb2"/>
+    <Button
+        android:padding="2dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:id="@+id/settingvideo_btn"
+        android:layout_margin="1dp"
+        android:layout_weight="8"
+            android:background="@drawable/setting"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    <ImageButton
+
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="3dp"
+        android:id="@+id/videofullscreen_btn"
+        android:layout_margin="1dp"
+        android:layout_weight="8"
+        android:background="@drawable/full_screen_in"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+
+
+</LinearLayout>

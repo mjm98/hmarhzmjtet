@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class Page {
     int pageNumber;
     ArrayList<Integer> imgs;
-    ArrayList<Integer> voices;
-    ArrayList<Integer> videos;
+    ArrayList<Audios> voices;
+    ArrayList<Videos> videos;
 
-    public Page(int pageNumber, ArrayList<Integer> imgs, ArrayList<Integer> voices, ArrayList<Integer> videos) {
+    public Page(int pageNumber, ArrayList<Integer> imgs, ArrayList<Audios> voices, ArrayList<Videos> videos) {
 
         this.pageNumber = pageNumber;
         this.imgs = imgs;
@@ -24,11 +24,11 @@ public class Page {
         return imgs;
     }
 
-    public ArrayList<Integer> getVoices() {
+    public ArrayList<Audios> getVoices() {
         return voices;
     }
 
-    public ArrayList<Integer> getVideos() {
+    public ArrayList<Videos> getVideos() {
         return videos;
     }
 
