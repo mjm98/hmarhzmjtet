@@ -301,7 +301,7 @@ public class VideoActivity extends Activity {
 
     private void setRecycler() {
 
-        adapter=new SimilarVideoRecyclerAdapter();
+        adapter=new SimilarVideoRecyclerAdapter(bookId,pageId,videoId);
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true);
         recyclerView.setLayoutManager(horizontalLayoutManager);
         recyclerView.setAdapter(adapter);

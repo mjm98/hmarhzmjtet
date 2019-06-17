@@ -9,12 +9,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import mandh.ir.myapplication.R;
+import mandh.ir.myapplication.models.StaticsData;
 
 import static mandh.ir.myapplication.forHelp.G.context;
 
 public class SimilarVideoRecyclerAdapter extends RecyclerView.Adapter<SimilarVideoRecyclerAdapter.ItemHolder>  {
 
-    public SimilarVideoRecyclerAdapter() {
+    int pageid,bookid,videoid;
+    public SimilarVideoRecyclerAdapter(int bookid,int pageid,int videoid) {
+        this.bookid=bookid;
+        this.videoid=videoid;
+        this.pageid=pageid;
     }
 
     @Override
@@ -26,11 +31,12 @@ public class SimilarVideoRecyclerAdapter extends RecyclerView.Adapter<SimilarVid
     @Override
     public void onBindViewHolder(ItemHolder holder, int position) {
 
+
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return (StaticsData.makeData().get(bookid).getPages().get(pageid).getVideos().size()-1);
     }
 
     public class ItemHolder extends RecyclerView.ViewHolder{

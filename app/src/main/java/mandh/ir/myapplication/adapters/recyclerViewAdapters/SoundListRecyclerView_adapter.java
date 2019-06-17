@@ -198,11 +198,13 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
 
     }
     public void stop(){
+        if(player!=null)
         player.pause();
     }
     public void release(){
+        if(player!=null){
         player.stop();
-        player.release();
+        player.release();}
     }
 
     public class RecViewHolder extends RecyclerView.ViewHolder {
