@@ -1,110 +1,227 @@
 package mandh.ir.myapplication.activitys;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.media.Image;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
 import mandh.ir.myapplication.R;
+import mandh.ir.myapplication.activitys.FullScreenActivity;
 import mandh.ir.myapplication.adapters.recyclerViewAdapters.SimilarVideoRecyclerAdapter;
-import mandh.ir.myapplication.forHelp.G;
 
 import static mandh.ir.myapplication.forHelp.G.context;
 
-public class VideoActivity extends AppCompatActivity {
-    public static int time=0;
-    LinearLayout controller;
-    VideoView videoView;
+public class VideoActivity extends Activity {
+
+
     TabLayout bottomTabLayout;
-    TextView title,videoDiscription,date,others;
-    RecyclerView recyclerView;
+    EditText searchEtx;
     SimilarVideoRecyclerAdapter adapter;
-    Button play,stop,setting;
-    ImageButton fullscreen,full;
-    boolean playFlag=false;
+    RecyclerView recyclerView;
+    TextView vidsTitle;
+    TextView title;
+    TextView descriptionTxt;
+    TextView dateTx;
+    VideoView videoView;
+    ImageView play,stop,setting;
     SeekBar videseekbar;
     Handler mHandler;
     Runnable updateTimeTask;
     boolean toaching=false;
+    boolean playFlag=false;
+    LinearLayout media_controller;
+    ImageView pauseImage;
+    ImageView videoClickableView;
+    public static int vidTime =0;
+    ImageView fullScrennBtn;
+    String path;
+    public static boolean isVideoPlaying = false;
+    ImageView stopBtn;
+    ImageView tagBtn;
+    ImageView downloadBtn;
+    ImageView favBtn;
+    String  description;
+    int bookId;
+    int pageId;
+    ImageView videoPreview;
+    ImageView settingBtn;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_video);
-        time=0;
 
-        videoView=(VideoView)findViewById(R.id.video2);
-        recyclerView=(RecyclerView)findViewById(R.id.similarvideorecycler);
-        bottomTabLayout = (TabLayout) findViewById(R.id.tab3);
-        title=(TextView)findViewById(R.id.videoTitle2);
-        videoDiscription=(TextView)findViewById(R.id.videoDetail);
-        others=(TextView)findViewById(R.id.others);
-        date=(TextView)findViewById(R.id.date1);
-        fullscreen=(ImageButton) findViewById(R.id.videofullscreen_btn);
-        full=(ImageButton)findViewById(R.id.fullscreenbtn12);
-        play=(Button) findViewById(R.id.playvideo_btn) ;
-        stop=(Button) findViewById(R.id.playvideo_stop);
-        setting=(Button) findViewById(R.id.settingvideo_btn);
-        videseekbar=(SeekBar)findViewById(R.id.videoseekbar);
-        time=0;
+        cast();
 
-        listeners();
+        Bundle extras = getIntent().getExtras();
+        if (extras!=null) {
 
+            path = extras.getString("videoUri");
+            description = extras.getString("description");
+            bookId = extras.getInt("bookId");
+            pageId = extras.getInt("pageId");
 
-        String path = "android.resource://" + getPackageName() + "/" + R.raw.video1;
-         videoView.setVideoURI(Uri.parse(path));
-         videoView.seekTo(time);
+        }
 
-       /* MediaController mediaController=new MediaController(this);
+        path = "android.resource://" + getPackageName() + "/" + R.raw.video3;
+        videoView.setVideoURI(Uri.parse(path));
 
-        videoView.setMediaController(mediaController);
-        mediaController.setAnchorView(videoView);*/
+        Uri  videoURI = Uri.parse(path);
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        retriever.setDataSource(this, videoURI);
+        Bitmap bitmap = retriever
+                .getFrameAtTime(100000,MediaMetadataRetriever.OPTION_PREVIOUS_SYNC);
 
-        //ViewGroup.LayoutParams params = videoView.getLayoutParams();
-        // Double z=    (float) params.width*3.0/4.0;
-        // params.height= z.intValue();
-        // Toast.makeText(G.context,String.valueOf(videoView.get),Toast.LENGTH_LONG).show();
-        //videoView.setLayoutParams(params);
+        Drawable drawable = new BitmapDrawable(getResources(), bitmap);
+        videoPreview.setImageDrawable(drawable);
 
-        adapter=new SimilarVideoRecyclerAdapter();
-        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(VideoActivity.this, LinearLayoutManager.HORIZONTAL, true);
-        recyclerView.setLayoutManager(horizontalLayoutManager);
-        recyclerView.setAdapter(adapter);
+        setTYpeFaces();
 
-       setbottomtablayout();
-       setTYpeFaces();
-       listeners();
-       seekbarsetting();
+        setBottomTabLayout();
+
+        setRecycler();
+
+        seekbarsetting();
+
         updateProgressBar();
 
 
 
+///////////////////////////////////////listeners////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        pauseImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                play.performClick();
+            }
+        });
+
+        stop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                VideoActivity.vidTime=0;
+                videoView.seekTo(VideoActivity.vidTime);
+                isVideoPlaying=false;
+                play.setImageDrawable(getResources().getDrawable(R.drawable.h_play));
+                videoClickableView.setVisibility(View.GONE);
+                pauseImage.setVisibility(View.VISIBLE);
+                videoView.pause();            }
+        });
+
+        settingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getBaseContext(), "setting clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(isVideoPlaying){
+
+                    play.setImageDrawable(getResources().getDrawable(R.drawable.h_play));
+                    pauseImage.setVisibility(View.VISIBLE);
+                    videoClickableView.setVisibility(View.GONE);
+                    videoView.pause();
+                    isVideoPlaying=false;
+
+                }else {
+                    videoPreview.setVisibility(View.INVISIBLE);
+                    isVideoPlaying=true;
+                    play.setImageDrawable(getResources().getDrawable(R.drawable.h_pause));
+                    pauseImage.setVisibility(View.GONE);
+                    videoClickableView.setVisibility(View.VISIBLE);
+                    media_controller.setVisibility(View.INVISIBLE);
+                    videoView.start();
+
+                }
+            }
+        });
+
+        videoClickableView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (media_controller.getVisibility()==View.VISIBLE) media_controller.setVisibility(View.GONE);
+                else media_controller.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+        fullScrennBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                vidTime=videoView.getCurrentPosition();
+                videoView.pause();
+                Intent i=new Intent(VideoActivity.this,FullScreenActivity.class);
+                i.putExtra("videoUri",path);
+                i.putExtra("isVideoPlaying",isVideoPlaying);
+                startActivity(i);
+            }
+        });
+
+        tagBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(VideoActivity.this, "click", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        downloadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(VideoActivity.this, "click", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        favBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(VideoActivity.this, "click", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
 
 
     }
+
+
+
+
     private void updateProgressBar() {
         mHandler.postDelayed(updateTimeTask, 100);
     }
+
+
     private void seekbarsetting() {
         mHandler=new Handler();
 
@@ -112,7 +229,6 @@ public class VideoActivity extends AppCompatActivity {
             public void run() {
                 videseekbar.setProgress(videoView.getCurrentPosition());
                 videseekbar.setMax(videoView.getDuration());
-                VideoActivity.time=videoView.getCurrentPosition();
                 if(!toaching){
                     mHandler.postDelayed(this, 100);}
             }
@@ -135,75 +251,69 @@ public class VideoActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 videoView.seekTo(seekBar.getProgress());
                 mHandler.postDelayed(updateTimeTask,100);
-                VideoActivity.time=videoView.getCurrentPosition();
+
                 toaching=false;
 
             }
         });
 
     }
-    private void listeners() {
-
-        play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(playFlag){
-                    playFlag=false;
-                    play.setBackground( getResources().getDrawable( R.drawable.play_white ));
-                    videoView.pause();
-                }else {
-                    playFlag=true;
-
-                    play.setBackground( getResources().getDrawable( R.drawable.pause_white));
-                    videoView.start();
-
-                }
-            }
-        });
-
-        stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                videoView.seekTo(0);
-                playFlag=false;
-                play.setBackground( getResources().getDrawable( R.drawable.play_white ));
-                videoView.pause();
-            }
-        });
 
 
+    private void setTYpeFaces() {
+        Typeface myTypeface = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileBold.ttf");
+        Typeface myTypeface2 = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileMedium.ttf");
 
-
-
-        full.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                time=videoView.getCurrentPosition();
-                videoView.pause();
-                Intent i=new Intent(VideoActivity.this,FullScreenActivity.class);
-                VideoActivity.this.startActivity(i);
-
-            }
-        });
-
-
-
-        fullscreen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                time=videoView.getCurrentPosition();
-                videoView.pause();
-                Intent i=new Intent(VideoActivity.this,FullScreenActivity.class);
-                VideoActivity.this.startActivity(i);
-                //overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-
-
-
-            }
-        });
+        title.setTypeface(myTypeface);
+        descriptionTxt.setTypeface(myTypeface2);
+        vidsTitle.setTypeface(myTypeface);
+        dateTx.setTypeface(myTypeface);
     }
 
-    private void setbottomtablayout() {
+
+    private void cast() {
+        settingBtn=(ImageView) findViewById(R.id.setting);
+        tagBtn=(ImageView) findViewById(R.id.tagBtn);
+        downloadBtn= (ImageView) findViewById(R.id.downloadBtn);
+        favBtn= (ImageView) findViewById(R.id.favBtn);
+        stop=(ImageView) findViewById(R.id.stop);
+        pauseImage=(ImageView) findViewById(R.id.pause_image);
+        recyclerView=(RecyclerView)findViewById(R.id.similarvideorecycler);
+        bottomTabLayout = (TabLayout) findViewById(R.id.tab);
+        searchEtx = (EditText) findViewById(R.id.edit_text);
+        vidsTitle =(TextView) findViewById(R.id.vids_title);
+        title = (TextView) findViewById(R.id.title);
+        descriptionTxt =(TextView) findViewById(R.id.description);
+        dateTx =(TextView) findViewById(R.id.date);
+        videoView=(VideoView)findViewById(R.id.video2);
+        play=(ImageView) findViewById(R.id.playvideo_btn) ;
+        videseekbar=(SeekBar)findViewById(R.id.videoseekbar);
+        media_controller= (LinearLayout) findViewById(R.id.media_controller);
+        videoClickableView=(ImageView)  findViewById(R.id.clickable_view);
+        fullScrennBtn=(ImageView) findViewById(R.id.fullScreenBtn);
+        stopBtn=(ImageView) findViewById(R.id.stop);
+        videoPreview=(ImageView) findViewById(R.id.video_preview);
+
+
+    }
+
+    private void setRecycler() {
+
+        adapter=new SimilarVideoRecyclerAdapter();
+        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true);
+        recyclerView.setLayoutManager(horizontalLayoutManager);
+        recyclerView.setAdapter(adapter);
+        recyclerView.scrollToPosition(horizontalLayoutManager.getItemCount()-1);
+
+
+
+    }
+
+
+    private void setBottomTabLayout() {
+
+
+        //create tabs
         bottomTabLayout.addTab(bottomTabLayout.newTab());
         bottomTabLayout.addTab(bottomTabLayout.newTab());
         bottomTabLayout.addTab(bottomTabLayout.newTab());
@@ -278,14 +388,51 @@ public class VideoActivity extends AppCompatActivity {
             @Override
             public void onTabReselected(TabLayout.Tab tab) {}
         });
-    }
-
-    private void setTYpeFaces() {
-        Typeface myTypeface = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileBold.ttf");
-        others.setTypeface(myTypeface);
-        //videoDiscription.setTypeface(myTypeface);
-        title.setTypeface(myTypeface);
-        date.setTypeface(myTypeface);
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        videoView.pause();
+        vidTime=videoView.getCurrentPosition();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        videoView.seekTo((int) vidTime);
+
+
+
+        if (isVideoPlaying) {
+            videoView.start();
+            pauseImage.setVisibility(View.GONE);
+            videoClickableView.setVisibility(View.VISIBLE);
+            play.setImageDrawable(getResources().getDrawable(R.drawable.h_pause));
+
+        }
+        else {
+            videoView.pause();
+            pauseImage.setVisibility(View.VISIBLE);
+            videoClickableView.setVisibility(View.GONE);
+            play.setImageDrawable(getResources().getDrawable(R.drawable.h_play));
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        isVideoPlaying=false;
+        vidTime=0;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        isVideoPlaying=false;
+        finish();
+    }
+
+
 }

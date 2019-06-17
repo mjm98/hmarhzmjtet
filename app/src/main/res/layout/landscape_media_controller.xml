@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/media_controller"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:background="#1e243a"
+    android:padding="3dp"
+    android:layout_height="25dp"
+    android:layoutDirection="ltr"
+    android:layout_alignParentBottom="true"
+    >
+
+    <LinearLayout
+        android:layoutDirection="ltr"
+        android:layout_weight="3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/playvideo_btn"
+            android:src="@drawable/h_play"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+        <ImageView
+            android:id="@+id/stop"
+            android:src="@drawable/h_stop"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <SeekBar
+            android:layout_gravity="center"
+            android:id="@+id/videoseekbar"
+            android:layout_weight="2"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            android:progressDrawable="@drawable/seekbar2"
+            android:thumb="@drawable/thumb2"/>
+
+
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:layoutDirection="ltr"
+        android:layout_weight="3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/setting"
+            android:src="@drawable/h_setting"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+        <ImageView
+            android:id="@+id/fullScreenBtn"
+            android:src="@drawable/h_full_screen"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>
