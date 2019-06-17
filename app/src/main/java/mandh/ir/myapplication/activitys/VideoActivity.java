@@ -62,6 +62,7 @@ public class VideoActivity extends Activity {
     String  description;
     int bookId;
     int pageId;
+    int videoId;
     ImageView videoPreview;
     ImageView settingBtn;
 
@@ -80,14 +81,15 @@ public class VideoActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         if (extras!=null) {
 
-            path = extras.getString("videoUri");
+            path = extras.getString("path");
             description = extras.getString("description");
             bookId = extras.getInt("bookId");
             pageId = extras.getInt("pageId");
+            pageId = extras.getInt("videoId");
 
         }
 
-        path = "android.resource://" + getPackageName() + "/" + R.raw.video3;
+        path = "android.resource://" + getPackageName() + "/" + path;
         videoView.setVideoURI(Uri.parse(path));
 
         Uri  videoURI = Uri.parse(path);

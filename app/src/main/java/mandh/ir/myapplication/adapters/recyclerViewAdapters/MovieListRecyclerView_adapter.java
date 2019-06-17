@@ -1,11 +1,17 @@
 package mandh.ir.myapplication.adapters.recyclerViewAdapters;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.media.MediaMetadataRetriever;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +37,9 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
 
     //..............................................................................................
     Videos model;
+    int bookid=0;
+    int pageid=1;
+    int videoid=0;
 
     //..............................................................................................
     private ArrayList<Videos> arrayList = new ArrayList<>();
@@ -41,8 +50,9 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
 
 
     //constructor
-    public MovieListRecyclerView_adapter(VideosAndAudios list ) {
-
+    public MovieListRecyclerView_adapter(VideosAndAudios list,int bookid,int movieid ) {
+        this.bookid=bookid;
+        this.videoid=movieid;
         this.arrayList =list.getVideos();
     }
 
@@ -58,6 +68,15 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
 
         model= arrayList.get(position);
 
+        Uri  videoURI = Uri.parse("android.resource://" + G.context.getPackageName() +"/"
+                +arrayList.get(position).getUri());
+        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        retriever.setDataSource(G.context, videoURI);
+        Bitmap bitmap = retriever
+                .getFrameAtTime(100000,MediaMetadataRetriever.OPTION_PREVIOUS_SYNC);
+        Drawable drawable = new BitmapDrawable(G.context.getResources(), bitmap);
+        holder.imageView.setImageDrawable(drawable);
+
         holder.title.setTypeface(myTypeface2);
         holder.title.setText(model.getName());
         holder.content.setText(model.getDiscription());
@@ -67,7 +86,13 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
 
             @Override
             public void onClick(View v) {
+                videoid=position;
                 Intent intent=new Intent(G.context,VideoActivity.class);
+                intent.putExtra("bookId",bookid);
+                intent.putExtra("pageId",pageid);
+                intent.putExtra("videoId",videoid);
+                intent.putExtra("path",arrayList.get(position).getUri());
+                intent.putExtra("description",arrayList.get(position).getDiscription());
                 G.context.startActivity(intent);
                 Toast.makeText(G.context,String.valueOf(position),Toast.LENGTH_LONG).show();
             }
@@ -87,6 +112,7 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
         TextView title;
         TextView content;
         RelativeLayout rl;
+        ImageView imageView;
 
         public classes_list_holder(View itemView) {
 
@@ -94,6 +120,7 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
             rl=(RelativeLayout) itemView.findViewById(R.id.movie_layout);
             title=(TextView) itemView.findViewById(R.id.title);
             content=(TextView) itemView.findViewById(R.id.description);
+            imageView=(ImageView) itemView.findViewById(R.id.image3);
         }
     }
 

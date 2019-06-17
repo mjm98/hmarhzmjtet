@@ -97,9 +97,9 @@ public class MovieListActivity extends Activity {
         Intent i=new Intent(MovieListActivity.this,VideoActivity.class);
 
         if(pageid!=-1)
-            adapter = new MovieListRecyclerView_adapter((VideosAndAudios) StaticsData.makeData().get(bookid).getPages().get(pageid));
+            adapter = new MovieListRecyclerView_adapter((VideosAndAudios) StaticsData.makeData().get(bookid).getPages().get(pageid),bookid,pageid);
         else
-            adapter = new MovieListRecyclerView_adapter((VideosAndAudios)StaticsData.makeData().get(bookid));
+            adapter = new MovieListRecyclerView_adapter((VideosAndAudios)StaticsData.makeData().get(bookid),bookid,pageid);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);

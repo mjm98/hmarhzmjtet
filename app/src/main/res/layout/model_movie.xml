@@ -26,7 +26,7 @@
 
 
         <ImageView
-            android:id="@+id/image"
+            android:id="@+id/image3"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_alignParentRight="true"
@@ -82,7 +82,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="15dp"
             android:layout_toRightOf="@id/button_bar"
-            android:layout_toLeftOf="@id/image"
+            android:layout_toLeftOf="@id/image3"
             android:gravity="right"
             android:lines="1"
             android:text="عنوان ویدئو"
@@ -98,7 +98,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@id/button_bar"
-            android:layout_toLeftOf="@id/image"
+            android:layout_toLeftOf="@id/image3"
             android:gravity="right|top"
             android:lines="2"
             android:ellipsize="end"

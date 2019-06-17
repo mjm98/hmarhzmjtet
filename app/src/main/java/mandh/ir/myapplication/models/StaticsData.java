@@ -24,10 +24,12 @@ public class StaticsData {
 
     public static ArrayList<Book> makeData(){
         ArrayList<Videos> videos=new ArrayList<>();
-        Videos vp1=new Videos("R.raw.video1","مثلثات","اموزش مثلتات کنکور به شیوه مدرن",0);
-        Videos vp2=new Videos("R.raw.video2","اموزش ایفون","اموزش مقدماتی کار با گوشی ایفون و فنون استفاده از ان با استفاده از برنامه های مختلف",1);
-        Videos vp3=new Videos("R.raw.video3","اموزش توابع","اموزش توابع متناوب و و مسابل مربوط به انها ",2);
-        Videos vp4=new Videos("R.raw.video4","ویژگی توابع","اموزش دامنه و برد توابع با استفاده از روش های نو",3);
+        int v=R.raw.video1;
+        Videos vp1=new Videos(String.valueOf(v),"مثلثات","اموزش مثلتات کنکور به شیوه مدرن",0);
+        v=R.raw.video2;
+        Videos vp2=new Videos(String.valueOf(R.raw.video2),"اموزش ایفون","اموزش مقدماتی کار با گوشی ایفون و فنون استفاده از ان با استفاده از برنامه های مختلف",1);
+        Videos vp3=new Videos(String.valueOf(R.raw.video3),"اموزش توابع","اموزش توابع متناوب و و مسابل مربوط به انها ",2);
+        Videos vp4=new Videos(String.valueOf(R.raw.video4),"ویژگی توابع","اموزش دامنه و برد توابع با استفاده از روش های نو",3);
 
         videos.add(vp1);
         videos.add(vp2);
@@ -91,9 +93,9 @@ public class StaticsData {
     }
     public static Page page2(){
         ArrayList<Videos> videos=new ArrayList<>();
-        Videos vp1=new Videos("R.raw.video1","مثلثات","اموزش مثلتات کنکور به شیوه مدرن",0);
-        Videos vp2=new Videos("R.raw.video2","اموزش ایفون","اموزش مقدماتی کار با گوشی ایفون و فنون استفاده از ان با استفاده از برنامه های مختلف",1);
-        Videos vp3=new Videos("R.raw.video3","اموزش توابع","اموزش توابع متناوب و و مسابل مربوط به انها ",2);
+        Videos vp1=new Videos(String.valueOf(R.raw.video1),"مثلثات","اموزش مثلتات کنکور به شیوه مدرن",0);
+        Videos vp2=new Videos(String.valueOf(R.raw.video2),"اموزش ایفون","اموزش مقدماتی کار با گوشی ایفون و فنون استفاده از ان با استفاده از برنامه های مختلف",1);
+        Videos vp3=new Videos(String.valueOf(R.raw.video4),"اموزش توابع","اموزش توابع متناوب و و مسابل مربوط به انها ",2);
 
         videos.add(vp1);
         videos.add(vp2);
