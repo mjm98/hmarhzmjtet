@@ -85,6 +85,7 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
 
 
 
+
             final ViewHolder holder;
 
         if (convertView == null) {
@@ -187,11 +188,17 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
                    /* Model model=arrayList.get(view.getId());*/
                     int id = position;
                     Intent intent = null;
-
+                    intent = new Intent(G.context, SoundListActivity.class);
                     if (id==0) {
-                        intent.putExtra("pageid", pageid);
-                        intent.putExtra("bookid",bookid);
-                        intent = new Intent(G.context, SoundListActivity.class);
+                        try {
+                            intent.putExtra("pageid", pageid);
+                            intent.putExtra("bookid",bookid);
+                        }catch (Exception e){
+                            Toast.makeText(G.context,e.toString(),Toast.LENGTH_LONG).show();
+                        }
+
+
+
                     }
 
                     if (id==2) {
@@ -228,8 +235,10 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
         TextView num;
 
     }
-    public void setModel(ArrayList<ModelShowContent> array){
+    public void setModel(ArrayList<ModelShowContent> array,int pageid){
+        this.pageid=pageid;
         this.arrayList=array;
+
     }
 
 

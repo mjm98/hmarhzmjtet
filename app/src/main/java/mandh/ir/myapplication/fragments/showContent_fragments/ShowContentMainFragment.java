@@ -72,14 +72,14 @@ public class ShowContentMainFragment extends Fragment     {
                     pageid=Integer.valueOf(charSequence.toString())-1;
                     // gradeView.setPageid(Integer.valueOf(charSequence.toString()));
                     models=getPageModels();
-                    gradeView.setModel(getPageModels());
+                    gradeView.setModel(getPageModels(),pageid);
                     gradeView.notifyDataSetChanged();}
                     else {
                         Toast.makeText(G.context,"صفحه مورد نظر وجود ندارد",Toast.LENGTH_SHORT).show();
                     }
                 }else if(charSequence.length()==0){
                     models=getBooksModels();
-                    gradeView.setModel(getBooksModels());
+                    gradeView.setModel(getBooksModels(),-1);
                     gradeView.notifyDataSetChanged();
                 }
             }

@@ -36,6 +36,7 @@ public class SoundListActivity extends Activity {
 
 
     TabLayout bottomTabLayout;
+    SoundListRecyclerView_adapter adapter;
     TabLayout topTabLayout;
     ViewPager viewPager;
     Button qrButton;
@@ -46,6 +47,20 @@ public class SoundListActivity extends Activity {
     int bookid=0,pageid=1;
 
     ArrayList<SoundModel> arrayLiset;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        adapter.stop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        adapter.release();
+    }
+
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +113,10 @@ public class SoundListActivity extends Activity {
 
     private void setRecyclerView() {
 
-        SoundListRecyclerView_adapter adapter = new SoundListRecyclerView_adapter((VideosAndAudios)StaticsData.makeData().get(1).getPages().get(1),this);
+            if(pageid!=-1)
+                adapter = new SoundListRecyclerView_adapter((VideosAndAudios)StaticsData.makeData().get(bookid).getPages().get(pageid),this);
+            else
+                adapter = new SoundListRecyclerView_adapter((VideosAndAudios)StaticsData.makeData().get(bookid),this);
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);

@@ -113,7 +113,7 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
 
     @Override
     public int getItemCount() {
-        return list == null ? 0 : list.getVideos().size();
+        return list == null ? 0 : list.getVoices().size();
     }
 
     private void playBtnFun(final RecViewHolder holder, final int postion){
@@ -197,6 +197,13 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
         return min+":"+sec;
 
     }
+    public void stop(){
+        player.pause();
+    }
+    public void release(){
+        player.stop();
+        player.release();
+    }
 
     public class RecViewHolder extends RecyclerView.ViewHolder {
 
@@ -228,6 +235,10 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
 
 
         }
+
+
+
+
 
         //fade out animation............................................................................
         private void fadeOut(final View view) {
