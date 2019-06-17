@@ -5,10 +5,15 @@ import java.util.ArrayList;
 import mandh.ir.myapplication.R;
 
 public class StaticsData {
+
     public static ArrayList<Book> books=new ArrayList<>();
 
     public static void setBooks(ArrayList<Book> books) {
         StaticsData.books = books;
+    }
+
+    public static ArrayList<Book> getBooks() {
+        return books;
     }
 
     public static int[] booksimages={R.drawable.pic1,R.drawable.pic2,R.drawable.pic3,R.drawable.pic4,R.drawable.pic5,R.drawable.pic6,R.drawable.pic7,R.drawable.pic8,R.drawable.pic9,R.drawable.pic10};
@@ -20,9 +25,7 @@ public class StaticsData {
             " انتشارات مشاوران آموزش با درنظرگرفتن نیاز دانش\u200Cآموزان رشته علوم انسانی در درس ریاضی، دست به تألیف کتاب ریاضی و آمار زده است. به همین جهت با ارائه\u200Cی تمرین\u200Cهای بسیار ذهن دانش\u200Cآموز را برای حل مسائل آن آشنا می\u200Cسازد. به دلیل حساسیت دانش\u200Cآموزان این رشته نسبت به درس ریاضی، در بخش پاسخ\u200C تشریحی روش\u200Cهای مختلف حل سؤالات قرار گرفته تا با مروری بر آن بتوان سؤالات را به آسانی پاسخ داد"
     };
 
-
-
-    public static ArrayList<Book> makeData(){
+    public static void makeDataing(){
         ArrayList<Videos> videos=new ArrayList<>();
         int v=R.raw.video1;
         Videos vp1=new Videos(String.valueOf(v),"مثلثات","اموزش مثلتات کنکور به شیوه مدرن",0);
@@ -89,7 +92,12 @@ public class StaticsData {
 
 
 
+       setBooks(books);
+    }
+
+    public static ArrayList<Book> makeData(){
         return books;
+
     }
     public static Page page2(){
         ArrayList<Videos> videos=new ArrayList<>();

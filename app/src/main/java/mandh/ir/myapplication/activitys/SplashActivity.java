@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import mandh.ir.myapplication.R;
+import mandh.ir.myapplication.models.StaticsData;
 
 import static mandh.ir.myapplication.forHelp.G.context;
 
@@ -23,6 +24,8 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
+
+        StaticsData.makeDataing();
 
         sun0=(ImageView) findViewById(R.id.sun0);
         sun1=(ImageView)findViewById(R.id.sun1);
