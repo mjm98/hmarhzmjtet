@@ -17,14 +17,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
 
 import mandh.ir.myapplication.R;
 import mandh.ir.myapplication.adapters.recyclerViewAdapters.SoundListRecyclerView_adapter;
+import mandh.ir.myapplication.forHelp.G;
 import mandh.ir.myapplication.models.Model;
 import mandh.ir.myapplication.models.SoundModel;
+import mandh.ir.myapplication.models.StaticsData;
+import mandh.ir.myapplication.models.VideosAndAudios;
 
 import static mandh.ir.myapplication.forHelp.G.context;
 
@@ -39,12 +43,19 @@ public class SoundListActivity extends Activity {
     Spinner sortSpinner;
     TextView title;
     RecyclerView recyclerView;
+    int bookid=0,pageid=1;
 
     ArrayList<SoundModel> arrayLiset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try{
+        bookid=getIntent().getExtras().getInt("bookid");
+        pageid=getIntent().getExtras().getInt("pageid");}
+        catch (Exception e){
+            Toast.makeText(G.context,e.toString(),Toast.LENGTH_SHORT).show();
+        }
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sound_list);
@@ -86,7 +97,8 @@ public class SoundListActivity extends Activity {
     }
 
     private void setRecyclerView() {
-        SoundListRecyclerView_adapter adapter = new SoundListRecyclerView_adapter(arrayLiset);
+
+        SoundListRecyclerView_adapter adapter = new SoundListRecyclerView_adapter((VideosAndAudios)StaticsData.makeData().get(1).getPages().get(1),this);
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);

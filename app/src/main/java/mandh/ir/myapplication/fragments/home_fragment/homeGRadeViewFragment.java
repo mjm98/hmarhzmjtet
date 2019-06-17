@@ -130,8 +130,8 @@ public class homeGRadeViewFragment extends Fragment     {
             book.setNumberOfFiles(random.nextInt(35));
             book.setNumberOfPages(random.nextInt(24));
             book.setNumberOfVideos(random.nextInt(12));
-            arrayList.add(book);
-            StaticsData.setBooks(arrayList);
+            arrayList=StaticsData.makeData();
+            StaticsData.setBooks(StaticsData.makeData());
         }
 
     }

@@ -35,8 +35,89 @@ public class StaticsData {
         videos.add(vp4);
 
 
+        ArrayList<Audios> audios=new ArrayList<>();
 
-        return null;
+        int a=R.raw.b1;
+        Audios a1=new Audios(String.valueOf(a),"پادکست",1);
+        a=R.raw.b2;
+        Audios a2=new Audios(String.valueOf(a),"قسمت دو",2);
+        a=R.raw.c1;
+        Audios a3=new Audios(String.valueOf(a),"اموزش",3);
+        a=R.raw.c2;
+        Audios a4=new Audios(String.valueOf(a),"بایت و بیت",4);
+        a=R.raw.c3;
+        Audios a5=new Audios(String.valueOf(a),"موفقیت",5);
+
+        audios.add(a1);
+        audios.add(a2);
+        audios.add(a3);
+        audios.add(a4);
+        audios.add(a5);
+
+        ArrayList<Integer> images=new ArrayList<>();
+        for(int i=0;i<booksimages.length;i++)
+            images.add(booksimages[i]);
+
+        Page p1=new Page(1,images,audios,videos);
+        Page p2=page2();
+        Page p3=page2();
+        ArrayList<Page> pages=new ArrayList<>();
+        pages.add(p1);
+        pages.add(p2);
+        pages.add(p3);
+
+        Book b1=new Book(booksimages[0],booksnames[0],booksnames[0],pages,3,10,11,5,8,9,0);
+        Book b2=new Book(booksimages[1],booksnames[1],booksnames[1],pages,3,10,11,6,5,4,1);
+        Book b3=new Book(booksimages[2],booksnames[2],booksnames[2],pages,3,10,11,4,7,6,2);
+        Book b4=new Book(booksimages[3],booksnames[3],booksnames[3],pages,3,10,11,2,9,5,3);
+        Book b5=new Book(booksimages[4],booksnames[4],booksnames[4],pages,3,10,11,3,3,4,4);
+        Book b6=new Book(booksimages[5],booksnames[5],booksnames[5],pages,3,10,11,1,11,9,5);
+        Book b7=new Book(booksimages[6],booksnames[6],booksnames[6],pages,3,10,11,5,4,1,6);
+        Book b8=new Book(booksimages[7],booksnames[7],booksnames[7],pages,3,10,11,7,6,9,7);
+
+        ArrayList<Book> books=new ArrayList<>();
+        books.add(b1);
+        books.add(b2);
+        books.add(b3);
+        books.add(b4);
+        books.add(b5);
+        books.add(b6);
+        books.add(b7);
+        books.add(b8);
+
+
+
+        return books;
+    }
+    public static Page page2(){
+        ArrayList<Videos> videos=new ArrayList<>();
+        Videos vp1=new Videos("R.raw.video1","مثلثات","اموزش مثلتات کنکور به شیوه مدرن",0);
+        Videos vp2=new Videos("R.raw.video2","اموزش ایفون","اموزش مقدماتی کار با گوشی ایفون و فنون استفاده از ان با استفاده از برنامه های مختلف",1);
+        Videos vp3=new Videos("R.raw.video3","اموزش توابع","اموزش توابع متناوب و و مسابل مربوط به انها ",2);
+
+        videos.add(vp1);
+        videos.add(vp2);
+        videos.add(vp3);
+
+        ArrayList<Audios> audios=new ArrayList<>();
+        Integer a=R.raw.b1;
+        Audios a1=new Audios(a.toString(),"پادکست",1);
+         a=R.raw.b2;
+        Audios a2=new Audios(a.toString(),"قسمت دو",2);
+        a=R.raw.c1;
+        Audios a3=new Audios(a.toString(),"اموزش",3);
+        audios.add(a1);
+        audios.add(a2);
+        audios.add(a3);
+        ArrayList<Integer> images=new ArrayList<>();
+        for(int i=0;i<booksimages.length;i++)
+            images.add(booksimages[i]);
+
+        Page p1=new Page(2,images,audios,videos);
+        return p1;
+
+
+
     }
 
 }

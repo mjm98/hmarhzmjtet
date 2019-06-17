@@ -35,6 +35,7 @@
 
 
             <EditText
+                android:imeOptions="actionUnspecified"
                 android:id="@+id/number"
                 android:textColor="#6a64d7"
                 android:layout_above="@+id/line"

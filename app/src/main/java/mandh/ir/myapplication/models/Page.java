@@ -2,7 +2,7 @@ package mandh.ir.myapplication.models;
 
 import java.util.ArrayList;
 
-public class Page {
+public class Page implements InformationofBook,VideosAndAudios{
     int pageNumber;
     ArrayList<Integer> imgs;
     ArrayList<Audios> voices;
@@ -33,4 +33,33 @@ public class Page {
     }
 
 
+    @Override
+    public int getNumberOfPics() {
+        return 3;
+    }
+
+    @Override
+    public int getNumberOfVoices() {
+        return voices.size();
+    }
+
+    @Override
+    public int getNumberOfVideos() {
+        return videos.size();
+    }
+
+    @Override
+    public int getNumberOfFiles() {
+        return 7;
+    }
+
+    @Override
+    public int getNumberOf3d() {
+        return 8;
+    }
+
+    @Override
+    public int getNumberOfdocs() {
+        return 6;
+    }
 }

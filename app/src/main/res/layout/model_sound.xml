@@ -146,7 +146,7 @@
 
                 <SeekBar
                     android:progressBackgroundTint="@color/zxing_possible_result_points"
-                    android:id="@+id/seekBar"
+                    android:id="@+id/seekBar2"
                     android:layout_alignParentTop="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -160,12 +160,14 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
+                        android:id="@+id/playsound_model"
                         android:src="@drawable/paly"
                         android:layout_width="17dp"
                         android:layout_height="17dp"
                         />
 
                     <ImageView
+                        android:id="@+id/puasesound_model"
                         android:layout_marginRight="10dp"
                         android:src="@drawable/pouse"
                         android:layout_width="17dp"

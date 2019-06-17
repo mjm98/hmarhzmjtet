@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import mandh.ir.myapplication.R;
 
-public class Book {
+public class Book implements InformationofBook,VideosAndAudios{
     int id;
     int imageurl;
     String title;
@@ -111,6 +111,11 @@ public class Book {
         return numberOfPages;
     }
 
+    @Override
+    public int getNumberOfPics() {
+        return 9;
+    }
+
     public int getNumberOfVoices() {
         return numberOfVoices;
     }
@@ -132,7 +137,21 @@ public class Book {
     }
 
 
+    @Override
+    public ArrayList<Audios> getVoices() {
+        ArrayList<Audios> audios=new ArrayList<>();
+        for(int i=0;i<this.pages.size();i++)
+            for(int j=0;j<this.pages.get(i).voices.size();j++)
+                audios.add(this.pages.get(i).voices.get(j));
+        return audios;
+    }
 
-
-
+    @Override
+    public ArrayList<Videos> getVideos() {
+        ArrayList<Videos> videos=new ArrayList<>();
+        for(int i=0;i<this.pages.size();i++)
+            for(int j=0;j<this.pages.get(i).videos.size();j++)
+                videos.add(this.pages.get(i).videos.get(j));
+        return videos;
+    }
 }
