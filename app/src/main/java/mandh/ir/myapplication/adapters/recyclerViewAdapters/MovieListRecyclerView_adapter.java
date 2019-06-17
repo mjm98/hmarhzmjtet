@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -16,6 +17,8 @@ import mandh.ir.myapplication.activitys.VideoActivity;
 import mandh.ir.myapplication.forHelp.G;
 import mandh.ir.myapplication.models.Model;
 import mandh.ir.myapplication.R;
+import mandh.ir.myapplication.models.Videos;
+import mandh.ir.myapplication.models.VideosAndAudios;
 
 import static mandh.ir.myapplication.forHelp.G.context;
 
@@ -27,19 +30,20 @@ import static mandh.ir.myapplication.forHelp.G.context;
 public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieListRecyclerView_adapter.classes_list_holder> {
 
     //..............................................................................................
-    Model model;
+    Videos model;
+
     //..............................................................................................
-    private ArrayList<Model> arrayList = new ArrayList<>();
+    private ArrayList<Videos> arrayList = new ArrayList<>();
     //..............................................................................................
     Typeface myTypeface = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileMedium.ttf");
     Typeface myTypeface2 = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileBold.ttf");
 
-    Intent i;
+
 
     //constructor
-    public MovieListRecyclerView_adapter(ArrayList<Model> arrayList ,Intent i) {
-        this.i=i;
-        this.arrayList =arrayList;
+    public MovieListRecyclerView_adapter(VideosAndAudios list ) {
+
+        this.arrayList =list.getVideos();
     }
 
     @Override
@@ -50,11 +54,13 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
 
 
     @Override
-    public void onBindViewHolder(final classes_list_holder holder, int position) {
+    public void onBindViewHolder(final classes_list_holder holder, final int position) {
 
         model= arrayList.get(position);
 
         holder.title.setTypeface(myTypeface2);
+        holder.title.setText(model.getName());
+        holder.content.setText(model.getDiscription());
         holder.content.setTypeface(myTypeface);
         holder.rl.setId(model.getId());
         holder.rl.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +69,7 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
             public void onClick(View v) {
                 Intent intent=new Intent(G.context,VideoActivity.class);
                 G.context.startActivity(intent);
-
+                Toast.makeText(G.context,String.valueOf(position),Toast.LENGTH_LONG).show();
             }
          });
 

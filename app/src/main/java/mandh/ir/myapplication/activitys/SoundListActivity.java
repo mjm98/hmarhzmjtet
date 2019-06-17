@@ -60,17 +60,15 @@ public class SoundListActivity extends Activity {
         adapter.release();
     }
 
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        try{
+
         bookid=getIntent().getExtras().getInt("bookid");
-        pageid=getIntent().getExtras().getInt("pageid");}
-        catch (Exception e){
-            Toast.makeText(G.context,e.toString(),Toast.LENGTH_SHORT).show();
-        }
+        pageid=getIntent().getExtras().getInt("pageid");
+
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_sound_list);

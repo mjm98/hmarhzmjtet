@@ -203,6 +203,8 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
 
                     if (id==2) {
                         intent = new Intent(G.context, MovieListActivity.class);
+                        intent.putExtra("pageid", pageid);
+                        intent.putExtra("bookid",bookid);
                     }
 
                     if (intent!=null) {

@@ -22,14 +22,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import mandh.ir.myapplication.R;
+import mandh.ir.myapplication.adapters.recyclerViewAdapters.SoundListRecyclerView_adapter;
 import mandh.ir.myapplication.models.Model;
 import mandh.ir.myapplication.adapters.recyclerViewAdapters.MovieListRecyclerView_adapter;
+import mandh.ir.myapplication.models.StaticsData;
+import mandh.ir.myapplication.models.VideosAndAudios;
 
 import static mandh.ir.myapplication.forHelp.G.context;
 
 public class MovieListActivity extends Activity {
 
-
+    MovieListRecyclerView_adapter adapter;
     TabLayout bottomTabLayout;
     TabLayout topTabLayout;
     ViewPager viewPager;
@@ -43,6 +46,8 @@ public class MovieListActivity extends Activity {
 
     TextView sampleVidTitle ;
     TextView sampleVidDescription ;
+    int bookid=0;
+    int pageid=1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +55,9 @@ public class MovieListActivity extends Activity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_movie_list);
+
+        bookid=getIntent().getExtras().getInt("bookid");
+        pageid=getIntent().getExtras().getInt("pageid");
 
         movieList = new ArrayList<>();
 
@@ -87,7 +95,11 @@ public class MovieListActivity extends Activity {
 
     private void setRecyclerView() {
         Intent i=new Intent(MovieListActivity.this,VideoActivity.class);
-        MovieListRecyclerView_adapter adapter = new MovieListRecyclerView_adapter(movieList,i);
+
+        if(pageid!=-1)
+            adapter = new MovieListRecyclerView_adapter((VideosAndAudios) StaticsData.makeData().get(bookid).getPages().get(pageid));
+        else
+            adapter = new MovieListRecyclerView_adapter((VideosAndAudios)StaticsData.makeData().get(bookid));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
