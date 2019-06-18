@@ -50,14 +50,19 @@ public class SoundListActivity extends Activity {
 
     @Override
     protected void onPause() {
-        super.onPause();
         adapter.stop();
+        super.onPause();
+
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
+
         adapter.release();
+        adapter.releaseHandler();
+        super.onDestroy();
+
+
     }
 
 
@@ -246,12 +251,6 @@ public class SoundListActivity extends Activity {
 
     }
 
-    @Override
-    public void onBackPressed() {
 
-        super.onBackPressed();
-        overridePendingTransition(R.anim.a_fade_in, R.anim.a_fade_out);
-
-    }
 
 }

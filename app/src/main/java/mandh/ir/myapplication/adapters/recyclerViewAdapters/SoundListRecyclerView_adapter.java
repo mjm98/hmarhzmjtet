@@ -38,6 +38,7 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
     Runnable runnable;
 
 
+
     public SoundListRecyclerView_adapter(VideosAndAudios list,Context context) {
         expandList=new ArrayList<>();
         this.context=context;
@@ -68,7 +69,7 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
         holder.title.setTypeface(myTypeface);
         holder.title.setText(list.getVoices().get(position).getName());
         holder.itemView.setId(position);
-        try{
+      /*  try{
             MediaMetadataRetriever mmr = new MediaMetadataRetriever();
             Uri musicUri = Uri.parse("android.resource://" + G.context.getPackageName() +"/"
                     +list.getVoices().get(position).getUri());
@@ -76,13 +77,10 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
             String durationStr = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
             mmr.release();
 
-        int time=Integer.valueOf(durationStr);
+        int time=Integer.valueOf(durationStr);*/
 
 
-        holder.time.setText(getTime(time));}
-        catch (Exception e){
-            Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();
-        }
+        holder.time.setText(list.getVoices().get(position).getDuration());
 
 
       holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +109,7 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
                     }
                 }
                 else  {expandList.set(position,false);
-                   player.pause();
+                  // player.pause();
                 }
 
                notifyItemRangeChanged(0,list.getVoices().size());
@@ -129,7 +127,7 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
         holder.playbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+               
                 player.start();
             }
         });
@@ -143,15 +141,15 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
     }
 
     private void play(int position, final RecViewHolder holder){
-        beforePosition=rightPosition;
+        try {
+            beforePosition=rightPosition;
+
         rightPosition=position;
         if(rightPosition!=beforePosition)
-        {
-
-
-            if(player!=null)
+        { if(player!=null)
             player.release();
-            player=MediaPlayer.create(context,Integer.valueOf(list.getVoices().get(position).getUri()));
+            player=MediaPlayer.create(context,Integer.valueOf(list.getVoices().get(position).getUri()));}
+
            // player.start();
             holder.seekBar.setMax(player.getDuration());
             holder.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -170,7 +168,7 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
                 public void onStopTrackingTouch(SeekBar seekBar) {
                     player.seekTo(seekBar.getProgress());
                     isTouching=false;
-                    handler.post(runnable);
+                    handler.postDelayed(runnable,100);
                 }
             });
 
@@ -184,7 +182,8 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
 
                 }
             };
-            handler.post(runnable);
+            handler.post(runnable);}catch (Exception e){
+            Toast.makeText(G.context,e.toString(),Toast.LENGTH_LONG).show();
 
 
         }
@@ -206,13 +205,21 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
         return min+":"+sec;
 
     }
+
+    public void releaseHandler(){
+
+        handler.removeCallbacks(runnable);
+
+
+    }
     public void stop(){
-        if(player!=null)
-        player.pause();
+        if(player!=null && player.isPlaying()){
+             player.pause();
+        }
     }
     public void release(){
         if(player!=null){
-        player.stop();
+
         player.release();}
     }
 

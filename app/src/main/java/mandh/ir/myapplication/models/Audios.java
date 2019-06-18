@@ -4,20 +4,22 @@ public class Audios {
     String uri;
     String name;
     int id;
-    int duration;
+    String duration;
 
-    public int getDuration() {
+
+    public String getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(String duration) {
         this.duration = duration;
     }
 
-    public Audios(String uri, String name, int id) {
+    public Audios(String uri, String name, int id,String duration) {
         this.uri = uri;
         this.name = name;
         this.id = id;
+        this.duration=duration;
     }
 
     public String getUri() {

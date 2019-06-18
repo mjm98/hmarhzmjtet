@@ -27,6 +27,7 @@ import android.widget.VideoView;
 import mandh.ir.myapplication.R;
 import mandh.ir.myapplication.activitys.FullScreenActivity;
 import mandh.ir.myapplication.adapters.recyclerViewAdapters.SimilarVideoRecyclerAdapter;
+import mandh.ir.myapplication.forHelp.G;
 
 import static mandh.ir.myapplication.forHelp.G.context;
 
@@ -75,144 +76,150 @@ public class VideoActivity extends Activity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_video);
+        try {
 
-        cast();
 
-        Bundle extras = getIntent().getExtras();
-        if (extras!=null) {
+            cast();
 
-            path = extras.getString("path");
-            description = extras.getString("description");
-            bookId = extras.getInt("bookId");
-            pageId = extras.getInt("pageId");
-            pageId = extras.getInt("videoId");
 
-        }
+            Bundle extras = getIntent().getExtras();
+            if (extras != null) {
 
-        path = "android.resource://" + getPackageName() + "/" + path;
-        videoView.setVideoURI(Uri.parse(path));
+                path = extras.getString("path");
+                description = extras.getString("description");
+                bookId = extras.getInt("bookId");
+                pageId = extras.getInt("pageId");
+                pageId = extras.getInt("videoId");
 
-        Uri  videoURI = Uri.parse(path);
-        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-        retriever.setDataSource(this, videoURI);
-        Bitmap bitmap = retriever
-                .getFrameAtTime(100000,MediaMetadataRetriever.OPTION_PREVIOUS_SYNC);
+            }
 
-        Drawable drawable = new BitmapDrawable(getResources(), bitmap);
-        videoPreview.setImageDrawable(drawable);
+            path = "android.resource://" + getPackageName() + "/" + path;
+            videoView.setVideoURI(Uri.parse(path));
 
-        setTYpeFaces();
+            Uri videoURI = Uri.parse(path);
+            MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+            retriever.setDataSource(this, videoURI);
+            Bitmap bitmap = retriever
+                    .getFrameAtTime(100000, MediaMetadataRetriever.OPTION_PREVIOUS_SYNC);
 
-        setBottomTabLayout();
+            Drawable drawable = new BitmapDrawable(getResources(), bitmap);
+            videoPreview.setImageDrawable(drawable);
 
-        setRecycler();
+            setTYpeFaces();
 
-        seekbarsetting();
+            setBottomTabLayout();
 
-        updateProgressBar();
+            setRecycler();
 
+            seekbarsetting();
+
+            updateProgressBar();
 
 
 ///////////////////////////////////////listeners////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        pauseImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                play.performClick();
-            }
-        });
+            pauseImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    play.performClick();
+                }
+            });
 
-        stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                VideoActivity.vidTime=0;
-                videoView.seekTo(VideoActivity.vidTime);
-                isVideoPlaying=false;
-                play.setImageDrawable(getResources().getDrawable(R.drawable.h_play));
-                videoClickableView.setVisibility(View.GONE);
-                pauseImage.setVisibility(View.VISIBLE);
-                videoView.pause();            }
-        });
-
-        settingBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getBaseContext(), "setting clicked", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-
-        play.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(isVideoPlaying){
-
+            stop.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    VideoActivity.vidTime = 0;
+                    videoView.seekTo(VideoActivity.vidTime);
+                    isVideoPlaying = false;
                     play.setImageDrawable(getResources().getDrawable(R.drawable.h_play));
-                    pauseImage.setVisibility(View.VISIBLE);
                     videoClickableView.setVisibility(View.GONE);
+                    pauseImage.setVisibility(View.VISIBLE);
                     videoView.pause();
-                    isVideoPlaying=false;
+                }
+            });
 
-                }else {
-                    videoPreview.setVisibility(View.INVISIBLE);
-                    isVideoPlaying=true;
-                    play.setImageDrawable(getResources().getDrawable(R.drawable.h_pause));
-                    pauseImage.setVisibility(View.GONE);
-                    videoClickableView.setVisibility(View.VISIBLE);
-                    media_controller.setVisibility(View.INVISIBLE);
-                    videoView.start();
+            settingBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getBaseContext(), "setting clicked", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
+            play.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (isVideoPlaying) {
+
+                        play.setImageDrawable(getResources().getDrawable(R.drawable.h_play));
+                        pauseImage.setVisibility(View.VISIBLE);
+                        videoClickableView.setVisibility(View.GONE);
+                        videoView.pause();
+                        isVideoPlaying = false;
+
+                    } else {
+                        videoPreview.setVisibility(View.INVISIBLE);
+                        isVideoPlaying = true;
+                        play.setImageDrawable(getResources().getDrawable(R.drawable.h_pause));
+                        pauseImage.setVisibility(View.GONE);
+                        videoClickableView.setVisibility(View.VISIBLE);
+                        media_controller.setVisibility(View.INVISIBLE);
+                        videoView.start();
+
+                    }
+                }
+            });
+
+            videoClickableView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    if (media_controller.getVisibility() == View.VISIBLE)
+                        media_controller.setVisibility(View.GONE);
+                    else media_controller.setVisibility(View.VISIBLE);
 
                 }
-            }
-        });
+            });
 
-        videoClickableView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            fullScrennBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    vidTime = videoView.getCurrentPosition();
+                    videoView.pause();
+                    Intent i = new Intent(VideoActivity.this, FullScreenActivity.class);
+                    i.putExtra("videoUri", path);
+                    i.putExtra("isVideoPlaying", isVideoPlaying);
+                    startActivity(i);
+                }
+            });
 
-                if (media_controller.getVisibility()==View.VISIBLE) media_controller.setVisibility(View.GONE);
-                else media_controller.setVisibility(View.VISIBLE);
+            tagBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(VideoActivity.this, "click", Toast.LENGTH_SHORT).show();
+                }
+            });
 
-            }
-        });
-
-        fullScrennBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                vidTime=videoView.getCurrentPosition();
-                videoView.pause();
-                Intent i=new Intent(VideoActivity.this,FullScreenActivity.class);
-                i.putExtra("videoUri",path);
-                i.putExtra("isVideoPlaying",isVideoPlaying);
-                startActivity(i);
-            }
-        });
-
-        tagBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(VideoActivity.this, "click", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        downloadBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(VideoActivity.this, "click", Toast.LENGTH_SHORT).show();
-            }
-        });
+            downloadBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(VideoActivity.this, "click", Toast.LENGTH_SHORT).show();
+                }
+            });
 
 
-        favBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(VideoActivity.this, "click", Toast.LENGTH_SHORT).show();
-            }
-        });
+            favBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(VideoActivity.this, "click", Toast.LENGTH_SHORT).show();
+                }
+            });
 
 
-
+        }catch (Exception e){
+            Toast.makeText(G.context, e.toString(), Toast.LENGTH_LONG).show();
+        }
 
     }
 
@@ -301,7 +308,7 @@ public class VideoActivity extends Activity {
 
     private void setRecycler() {
 
-        adapter=new SimilarVideoRecyclerAdapter(bookId,pageId,videoId);
+        adapter=new SimilarVideoRecyclerAdapter(0,1,1);
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true);
         recyclerView.setLayoutManager(horizontalLayoutManager);
         recyclerView.setAdapter(adapter);

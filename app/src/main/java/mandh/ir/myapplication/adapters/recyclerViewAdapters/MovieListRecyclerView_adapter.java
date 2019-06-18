@@ -7,6 +7,9 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.support.v4.os.AsyncTaskCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +43,7 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
     int bookid=0;
     int pageid=1;
     int videoid=0;
+    ArrayList<Bitmap> bitmaps=new ArrayList<>();
 
     //..............................................................................................
     private ArrayList<Videos> arrayList = new ArrayList<>();
@@ -54,6 +58,19 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
         this.bookid=bookid;
         this.videoid=movieid;
         this.arrayList =list.getVideos();
+        for(int i=0;i<arrayList.size();i++)
+            bitmaps.add(null);
+        Handler handler=new Handler();
+        Runnable runnable=new Runnable() {
+            @Override
+            public void run() {
+                SetPics setPics=new SetPics();
+                setPics.execute();
+            }
+        };
+        handler.postDelayed(runnable,200);
+
+
     }
 
     @Override
@@ -65,38 +82,65 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
 
     @Override
     public void onBindViewHolder(final classes_list_holder holder, final int position) {
+        try {
 
         model= arrayList.get(position);
 
-        Uri  videoURI = Uri.parse("android.resource://" + G.context.getPackageName() +"/"
+       final Uri  videoURI = Uri.parse("android.resource://" + G.context.getPackageName() +"/"
                 +arrayList.get(position).getUri());
-        MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+        /*MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         retriever.setDataSource(G.context, videoURI);
         Bitmap bitmap = retriever
                 .getFrameAtTime(100000,MediaMetadataRetriever.OPTION_PREVIOUS_SYNC);
         Drawable drawable = new BitmapDrawable(G.context.getResources(), bitmap);
-        holder.imageView.setImageDrawable(drawable);
+        holder.imageView.setImageDrawable(drawable);*/
+
+
+
+
+       /*try {
+            SetPics setPics=new SetPics(videoURI);
+            setPics.executeOnExecutor (holder.imageView);
+        }catch (Exception e) {
+           Toast.makeText(G.context, e.toString(), Toast.LENGTH_LONG).show();
+       }*/
+       Bitmap bmp=null;
+       if(bitmaps.get(position)!=null){
+           bmp=bitmaps.get(position);
+            if(bmp!=null){
+                    holder.imageView.setImageBitmap(bmp);
+            }
+       }
+
 
         holder.title.setTypeface(myTypeface2);
         holder.title.setText(model.getName());
         holder.content.setText(model.getDiscription());
         holder.content.setTypeface(myTypeface);
         holder.rl.setId(model.getId());
-        holder.rl.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                videoid=position;
-                Intent intent=new Intent(G.context,VideoActivity.class);
-                intent.putExtra("bookId",bookid);
-                intent.putExtra("pageId",pageid);
-                intent.putExtra("videoId",videoid);
-                intent.putExtra("path",arrayList.get(position).getUri());
-                intent.putExtra("description",arrayList.get(position).getDiscription());
-                G.context.startActivity(intent);
-                Toast.makeText(G.context,String.valueOf(position),Toast.LENGTH_LONG).show();
-            }
-         });
+
+
+            holder.rl.setOnClickListener(new View.OnClickListener() {
+
+
+                @Override
+                public void onClick(View v) {
+                    videoid = position;
+                   Intent intent = new Intent(G.context, VideoActivity.class);
+                    intent.putExtra("bookId", bookid);
+                    intent.putExtra("pageId", pageid);
+                    intent.putExtra("videoId", videoid);
+                    intent.putExtra("path", arrayList.get(position).getUri());
+                    intent.putExtra("description", arrayList.get(position).getDiscription());
+                    G.context.startActivity(intent);
+                    Toast.makeText(G.context, String.valueOf(position), Toast.LENGTH_LONG).show();
+                }
+            });
+        }catch (Exception e){
+            Toast.makeText(G.context, e.toString(), Toast.LENGTH_LONG).show();
+        }
+
 
     }
 
@@ -121,6 +165,34 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
             title=(TextView) itemView.findViewById(R.id.title);
             content=(TextView) itemView.findViewById(R.id.description);
             imageView=(ImageView) itemView.findViewById(R.id.image3);
+        }
+    }
+
+    private class SetPics extends AsyncTask<ImageView,Bitmap,Bitmap> {
+
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap) {
+            super.onPostExecute(bitmap);
+
+            MovieListRecyclerView_adapter.this.notifyDataSetChanged();
+        }
+
+        @Override
+        protected Bitmap doInBackground(ImageView... imageViews) {
+            for(int i=0;i<arrayList.size();i++){
+                Uri  videoURI = Uri.parse("android.resource://" + G.context.getPackageName() +"/"
+                        +arrayList.get(i).getUri());
+                MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+                retriever.setDataSource(G.context, videoURI);
+                Bitmap bitmap = retriever
+                        .getFrameAtTime(100000,MediaMetadataRetriever.OPTION_PREVIOUS_SYNC);
+                bitmaps.set(i,bitmap);
+                MovieListRecyclerView_adapter.this.notifyItemChanged(i);
+
+            }
+
+            return null;
         }
     }
 

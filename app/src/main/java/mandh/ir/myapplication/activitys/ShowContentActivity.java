@@ -234,7 +234,8 @@ public class ShowContentActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(R.anim.a_fade_in, R.anim.a_fade_out);
+
+       // overridePendingTransition(R.anim.a_fade_in, R.anim.a_fade_out);
 
     }
 

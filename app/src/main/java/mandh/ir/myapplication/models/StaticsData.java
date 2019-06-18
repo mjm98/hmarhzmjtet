@@ -43,15 +43,15 @@ public class StaticsData {
         ArrayList<Audios> audios=new ArrayList<>();
 
         int a=R.raw.b1;
-        Audios a1=new Audios(String.valueOf(a),"پادکست",1);
+        Audios a1=new Audios(String.valueOf(a),"پادکست",1,"11:44");
         a=R.raw.b2;
-        Audios a2=new Audios(String.valueOf(a),"قسمت دو",2);
+        Audios a2=new Audios(String.valueOf(a),"قسمت دو",2,"3:23");
         a=R.raw.c1;
-        Audios a3=new Audios(String.valueOf(a),"اموزش",3);
+        Audios a3=new Audios(String.valueOf(a),"اموزش",3,"7:23");
         a=R.raw.c2;
-        Audios a4=new Audios(String.valueOf(a),"بایت و بیت",4);
+        Audios a4=new Audios(String.valueOf(a),"بایت و بیت",4,"7:40");
         a=R.raw.c3;
-        Audios a5=new Audios(String.valueOf(a),"موفقیت",5);
+        Audios a5=new Audios(String.valueOf(a),"موفقیت",5,"3:46");
 
         audios.add(a1);
         audios.add(a2);
@@ -111,11 +111,11 @@ public class StaticsData {
 
         ArrayList<Audios> audios=new ArrayList<>();
         Integer a=R.raw.b1;
-        Audios a1=new Audios(a.toString(),"پادکست",1);
+        Audios a1=new Audios(a.toString(),"پادکست",1,"11:44");
          a=R.raw.b2;
-        Audios a2=new Audios(a.toString(),"قسمت دو",2);
+        Audios a2=new Audios(a.toString(),"قسمت دو",2,"3:23");
         a=R.raw.c1;
-        Audios a3=new Audios(a.toString(),"اموزش",3);
+        Audios a3=new Audios(a.toString(),"اموزش",3,"7:23");
         audios.add(a1);
         audios.add(a2);
         audios.add(a3);
