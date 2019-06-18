@@ -4,7 +4,9 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.graphics.Typeface;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -67,9 +69,16 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
         holder.title.setText(list.getVoices().get(position).getName());
         holder.itemView.setId(position);
         try{
-        MediaPlayer md=MediaPlayer.create(context,Integer.valueOf(list.getVoices().get(position).getUri()));
-        int time=md.getDuration();
-        md.release();
+            MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+            Uri musicUri = Uri.parse("android.resource://" + G.context.getPackageName() +"/"
+                    +list.getVoices().get(position).getUri());
+            mmr.setDataSource(G.context,musicUri);
+            String durationStr = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+            mmr.release();
+
+        int time=Integer.valueOf(durationStr);
+
+
         holder.time.setText(getTime(time));}
         catch (Exception e){
             Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();

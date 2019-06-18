@@ -4,6 +4,15 @@ public class Audios {
     String uri;
     String name;
     int id;
+    int duration;
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
 
     public Audios(String uri, String name, int id) {
         this.uri = uri;
