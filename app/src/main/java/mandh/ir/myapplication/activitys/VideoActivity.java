@@ -89,7 +89,7 @@ public class VideoActivity extends Activity {
                 description = extras.getString("description");
                 bookId = extras.getInt("bookId");
                 pageId = extras.getInt("pageId");
-                pageId = extras.getInt("videoId");
+                videoId = extras.getInt("videoId");
 
             }
 
@@ -308,7 +308,7 @@ public class VideoActivity extends Activity {
 
     private void setRecycler() {
 
-        adapter=new SimilarVideoRecyclerAdapter(0,1,1);
+        adapter=new SimilarVideoRecyclerAdapter(bookId,pageId,videoId);
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true);
         recyclerView.setLayoutManager(horizontalLayoutManager);
         recyclerView.setAdapter(adapter);

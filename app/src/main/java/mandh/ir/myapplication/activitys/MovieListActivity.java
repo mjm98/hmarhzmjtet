@@ -17,12 +17,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
 
 import mandh.ir.myapplication.R;
 import mandh.ir.myapplication.adapters.recyclerViewAdapters.SoundListRecyclerView_adapter;
+import mandh.ir.myapplication.forHelp.G;
 import mandh.ir.myapplication.models.Model;
 import mandh.ir.myapplication.adapters.recyclerViewAdapters.MovieListRecyclerView_adapter;
 import mandh.ir.myapplication.models.StaticsData;
@@ -96,10 +98,11 @@ public class MovieListActivity extends Activity {
     private void setRecyclerView() {
         Intent i=new Intent(MovieListActivity.this,VideoActivity.class);
 
-        if(pageid!=-1)
-            adapter = new MovieListRecyclerView_adapter((VideosAndAudios) StaticsData.makeData().get(bookid).getPages().get(pageid),bookid,pageid);
-        else
-            adapter = new MovieListRecyclerView_adapter((VideosAndAudios)StaticsData.makeData().get(bookid),bookid,pageid);
+        if(pageid!=-1) {
+            adapter = new MovieListRecyclerView_adapter((VideosAndAudios) StaticsData.makeData().get(bookid).getPages().get(pageid), bookid, pageid);
+
+        }else{
+            adapter = new MovieListRecyclerView_adapter((VideosAndAudios)StaticsData.makeData().get(bookid),bookid,pageid);}
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);

@@ -54,9 +54,9 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
 
 
     //constructor
-    public MovieListRecyclerView_adapter(VideosAndAudios list,int bookid,int movieid ) {
+    public MovieListRecyclerView_adapter(VideosAndAudios list,int bookid,int pageid ) {
         this.bookid=bookid;
-        this.videoid=movieid;
+        this.pageid=pageid;
         this.arrayList =list.getVideos();
         for(int i=0;i<arrayList.size();i++)
             bitmaps.add(null);
@@ -133,8 +133,10 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
                     intent.putExtra("videoId", videoid);
                     intent.putExtra("path", arrayList.get(position).getUri());
                     intent.putExtra("description", arrayList.get(position).getDiscription());
+                    intent.putExtra("videoName",arrayList.get(position).getName());
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     G.context.startActivity(intent);
-                    Toast.makeText(G.context, String.valueOf(position), Toast.LENGTH_LONG).show();
+
                 }
             });
         }catch (Exception e){

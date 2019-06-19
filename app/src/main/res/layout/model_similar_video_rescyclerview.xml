@@ -9,6 +9,7 @@
 
 
     <LinearLayout
+        android:id="@+id/similarmodellinear"
         android:background="#FFF8F5EB"
         android:orientation="vertical"
         android:layout_width="wrap_content"
