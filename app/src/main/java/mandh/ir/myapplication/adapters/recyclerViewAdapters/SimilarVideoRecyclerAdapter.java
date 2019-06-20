@@ -95,9 +95,9 @@ public class SimilarVideoRecyclerAdapter extends RecyclerView.Adapter<SimilarVid
             @Override
             public void onClick(View view) {
                 Intent i=new Intent(G.context, VideoActivity.class);
-                i.putExtra("pageid", pageid);
-                i.putExtra("bookid",bookid);
-                i.putExtra("videoId", videoid);
+                i.putExtra("pageId", pageid);
+                i.putExtra("bookId",bookid);
+                i.putExtra("videoId", list.get(videoList.get(position).getId()).getId());
                 i.putExtra("path", list.get(videoList.get(position).getId()).getUri());
                 i.putExtra("description", list.get(videoList.get(position).getId()).getDiscription());
                 i.putExtra("videoName",list.get(videoList.get(position).getId()).getName());

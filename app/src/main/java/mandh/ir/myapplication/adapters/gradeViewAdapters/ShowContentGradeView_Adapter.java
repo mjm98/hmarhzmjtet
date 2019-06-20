@@ -188,9 +188,10 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
                    /* Model model=arrayList.get(view.getId());*/
                     int id = position;
                     Intent intent = null;
-                    intent = new Intent(G.context, SoundListActivity.class);
+
                     if (id==0) {
                         try {
+                            intent = new Intent(G.context, SoundListActivity.class);
                             intent.putExtra("pageid", pageid);
                             intent.putExtra("bookid",bookid);
                         }catch (Exception e){
