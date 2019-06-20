@@ -102,8 +102,10 @@ public class VideoActivity extends Activity {
             Bitmap bitmap = retriever
                     .getFrameAtTime(100000, MediaMetadataRetriever.OPTION_PREVIOUS_SYNC);
 
+
             Drawable drawable = new BitmapDrawable(getResources(), bitmap);
             videoPreview.setImageDrawable(drawable);
+
 
             setTYpeFaces();
 

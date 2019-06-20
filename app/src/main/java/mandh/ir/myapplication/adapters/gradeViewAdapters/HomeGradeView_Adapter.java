@@ -132,6 +132,30 @@ public class HomeGradeView_Adapter extends BaseAdapter {
 
     }
 
+    public void sortData(int s){
+        if(s==1){
+        for(int i = 0; i<arrayList.size()-1; i++) {
+            for (int j = i+1; j<arrayList.size(); j++) {
+                if(arrayList.get(i).getTitle().compareTo(arrayList.get(j).getTitle())>0) {
+                    Book temp = arrayList.get(i);
+                    arrayList.set(i,arrayList.get(j));
+                    arrayList.set(j,temp);
+                }
+            }
+         }
+        }else if(s==2){
+            for(int i = 0; i<arrayList.size()-1; i++) {
+                for (int j = i+1; j<arrayList.size(); j++) {
+                    if(arrayList.get(i).getTitle().compareTo(arrayList.get(j).getTitle())<0) {
+                        Book temp = arrayList.get(i);
+                        arrayList.set(i,arrayList.get(j));
+                        arrayList.set(j,temp);
+                    }
+                }
+            }
+        }
+     }
+
 
 
 }

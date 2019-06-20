@@ -92,7 +92,7 @@ public class StaticsData {
 
 
 
-       setBooks(books);
+        setBooks(books);
     }
 
     public static ArrayList<Book> makeData(){

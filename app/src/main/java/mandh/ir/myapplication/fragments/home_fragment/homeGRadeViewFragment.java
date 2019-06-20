@@ -12,12 +12,14 @@ import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 import mandh.ir.myapplication.activitys.HomeActivity;
 import mandh.ir.myapplication.adapters.gradeViewAdapters.HomeGradeView_Adapter;
+import mandh.ir.myapplication.forHelp.G;
 import mandh.ir.myapplication.models.Book;
 import mandh.ir.myapplication.models.Model;
 import mandh.ir.myapplication.R;
@@ -37,6 +39,7 @@ public class homeGRadeViewFragment extends Fragment     {
     TextView title;
     Spinner gradeSpinner;
     Spinner sortSpinner;
+    HomeGradeView_Adapter gradeView;
     //..............................................................................................
     ArrayList<Book> arrayList;
 
@@ -90,6 +93,10 @@ public class homeGRadeViewFragment extends Fragment     {
                 ((TextView) adapterView.getChildAt(0)).setTypeface(myTypeface);
                 ((TextView) adapterView.getChildAt(0)).setTextSize(9);
                 ((TextView) adapterView.getChildAt(0)).setTextColor(Color.parseColor("#fad10f"));
+
+                    gradeView.sortData(i);
+                    gradeView.notifyDataSetChanged();
+
             }
 
             @Override
@@ -182,7 +189,7 @@ public class homeGRadeViewFragment extends Fragment     {
 
     private void setGradeView() {
 
-        HomeGradeView_Adapter gradeView = new HomeGradeView_Adapter(arrayList);
+         gradeView = new HomeGradeView_Adapter(arrayList);
         gridview.setAdapter(gradeView);
 
 
