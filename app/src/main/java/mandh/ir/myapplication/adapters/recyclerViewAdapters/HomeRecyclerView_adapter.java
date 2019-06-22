@@ -60,7 +60,7 @@ public class HomeRecyclerView_adapter extends RecyclerView.Adapter<HomeRecyclerV
 
         holder.title.setText(model.getTitle());
         holder.content.setText(model.getText());
-        holder.imageView.setImageResource(model.getImageUrl());
+      //  holder.imageView.setImageResource(model.getImageUrl());
 
 
     /* holder.layout.setId(model.getId());

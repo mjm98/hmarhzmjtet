@@ -1,4 +1,4 @@
-package mandh.ir.myapplication.fragments.showContent_fragments;
+package mandh.ir.myapplication.fragments.bookContent_fragments;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -16,7 +16,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import mandh.ir.myapplication.forHelp.G;
-import mandh.ir.myapplication.models.Model;
 import mandh.ir.myapplication.R;
 import mandh.ir.myapplication.adapters.gradeViewAdapters.ShowContentGradeView_Adapter;
 import mandh.ir.myapplication.models.ModelShowContent;
@@ -28,7 +27,7 @@ import static mandh.ir.myapplication.forHelp.G.context;
  * Created by Dell  5559 on 25/05/2019.
  */
 
-public class ShowContentMainFragment extends Fragment     {
+public class BookContentMainFragment extends Fragment     {
 
 
     ArrayList<ModelShowContent> models=new ArrayList<>();
@@ -158,24 +157,25 @@ public class ShowContentMainFragment extends Fragment     {
     }
     public ArrayList<ModelShowContent> getBooksModels(){
         ArrayList<ModelShowContent> models=new ArrayList<>();
-        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getNumberOfVoices()),"محتوای صوتی"));
-        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getNumberOfPages()),"محتوای تصویری"));
-        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getNumberOfVideos()),"محتوای ویدیویی"));
-        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getNumberOfFiles()),"محتوای فایلی"));
-        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getNumberOf3d()),"محتوای 3بعدی"));
-        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getNumberOfdocs()),"محتوای متنی"));
+        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getNumberOfVoices()),"محتوای صوتی",R.drawable.speaker_icon));
+        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getNumberOfPages()),"محتوای تصویری",R.drawable.gallery_icon));
+        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getNumberOfVideos()),"محتوای ویدیویی",R.drawable.video_icon));
+        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getNumberOfFiles()),"محتوای فایلی",R.drawable.folder_icon));
+        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getNumberOf3d()),"محتوای 3بعدی",R.drawable.ar_icon));
+        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getNumberOfdocs()),"محتوای متنی",R.drawable.text_icon));
 
 
         return models;
     }
     public ArrayList<ModelShowContent> getPageModels(){
         ArrayList<ModelShowContent> models=new ArrayList<>();
-        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getPages().get(pageid) .getNumberOfVoices()),"محتوای صوتی"));
-        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getPages().get(pageid).getNumberOfPics()),"محتوای تصویری"));
-        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getPages().get(pageid) .getNumberOfVideos()),"محتوای ویدیویی"));
-        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getPages().get(pageid) .getNumberOfFiles()),"محتوای فایلی"));
-        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getPages().get(pageid).getNumberOf3d()),"محتوای 3بعدی"));
-        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getPages().get(pageid) .getNumberOfdocs()),"محتوای متنی"));
+        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getPages().get(pageid) .getNumberOfVoices()),"محتوای صوتی",R.drawable.speaker_icon));
+        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getPages().get(pageid).getNumberOfPics()),"محتوای تصویری",R.drawable.gallery_icon));
+        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getPages().get(pageid) .getNumberOfVideos()),"محتوای ویدیویی",R.drawable.video_icon));
+        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getPages().get(pageid) .getNumberOfFiles()),"محتوای فایلی",R.drawable.folder_icon));
+        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getPages().get(pageid).getNumberOf3d()),"محتوای 3بعدی",R.drawable.ar_icon));
+        models.add(new ModelShowContent(String.valueOf(StaticsData.makeData().get(bookid).getPages().get(pageid) .getNumberOfdocs()),"محتوای متنی",R.drawable.text_icon));
+
 
 
         return models;

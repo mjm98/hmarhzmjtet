@@ -88,8 +88,6 @@ public class SoundListActivity extends Activity {
 
         setRecyclerView();
 
-        setBottomTabLayout();
-
         setSortSpinners();
 
 
@@ -172,85 +170,12 @@ public class SoundListActivity extends Activity {
 
     }
 
-    private void setBottomTabLayout() {
-
-        //create tabs
-        bottomTabLayout.addTab(bottomTabLayout.newTab());
-        bottomTabLayout.addTab(bottomTabLayout.newTab());
-        bottomTabLayout.addTab(bottomTabLayout.newTab());
-        bottomTabLayout.addTab(bottomTabLayout.newTab());
-        bottomTabLayout.addTab(bottomTabLayout.newTab());
-
-        Typeface myTypeface = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileMedium.ttf");
-
-        //.......................create custom Views and add them to bottomTabLayout.......................
-
-        View view1 = View.inflate(this, R.layout.custom_view_tab_layout_disable, null);
-        TextView title = (TextView) view1.findViewById(R.id.title);
-        title.setText("تنظیمات");
-        title.setTypeface(myTypeface);
-
-        bottomTabLayout.getTabAt(0).setCustomView(null);
-        bottomTabLayout.getTabAt(0).setCustomView(view1);
 
 
-        View view2 = View.inflate(this, R.layout.custom_view_tab_layout_disable, null);
-        TextView title2 = (TextView) view2.findViewById(R.id.title);
-        title2.setText("شبکه علمی");
-        title2.setTypeface(myTypeface);
-
-        bottomTabLayout.getTabAt(1).setCustomView(null);
-        bottomTabLayout.getTabAt(1).setCustomView(view2);
-
-
-
-        View view3 = View.inflate(this, R.layout.custom_view_tab_layout_enable, null);
-
-        TextView title3 = (TextView) view3.findViewById(R.id.title);
-        title3.setText("خانه");
-        title3.setTypeface(myTypeface);
-
-        bottomTabLayout.getTabAt(2).setCustomView(null);
-        bottomTabLayout.getTabAt(2).setCustomView(view3);
-
-
-
-        View view4 = View.inflate(this, R.layout.custom_view_tab_layout_disable, null);
-        TextView title4 = (TextView) view4.findViewById(R.id.title);
-        title4.setText("چالش ها");
-        title4.setTypeface(myTypeface);
-
-        bottomTabLayout.getTabAt(3).setCustomView(null);
-        bottomTabLayout.getTabAt(3).setCustomView(view4);
-
-
-        View view5 = View.inflate(this, R.layout.custom_view_tab_layout_disable, null);
-        TextView title5 = (TextView) view5.findViewById(R.id.title);
-        title5.setText("پروفایل");
-        title5.setTypeface(myTypeface);
-
-        bottomTabLayout.getTabAt(4).setCustomView(null);
-        bottomTabLayout.getTabAt(4).setCustomView(view5);
-
-        bottomTabLayout.getTabAt(2).select();
-
-        //..........................................................................................
-
-        bottomTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-
-                //viewPager.setCurrentItem(tab.getPosition());
-            }
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {}
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {}
-        });
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
     }
-
-
-
 }

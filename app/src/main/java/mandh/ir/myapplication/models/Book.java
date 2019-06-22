@@ -136,9 +136,6 @@ public class Book implements InformationofBook,VideosAndAudios{
         return numberOfdocs;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
 
     @Override
     public ArrayList<Audios> getVoices() {

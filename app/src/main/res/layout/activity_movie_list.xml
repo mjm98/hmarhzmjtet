@@ -8,14 +8,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="mandh.ir.myapplication.activitys.HomeActivity">
+    tools:context="mandh.ir.myapplication.fragments.bookSelect_fragment.Parent_BookSelectFragment">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#fa4059"
-        android:layout_alignParentBottom="true"
-        />
 
 
     <RelativeLayout
@@ -209,18 +203,5 @@
 
 
 
-    <android.support.design.widget.TabLayout
-        android:transitionName="tr"
-        android:background="@drawable/frame"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="bottom"
-        android:id="@+id/tab"
-        >
-
-
-
-    </android.support.design.widget.TabLayout>
 
 </RelativeLayout>

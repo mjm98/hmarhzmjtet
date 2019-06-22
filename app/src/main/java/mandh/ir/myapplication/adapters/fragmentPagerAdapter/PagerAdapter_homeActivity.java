@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import mandh.ir.myapplication.fragments.home_fragment.HomeRecyclerViewFragment;
-import mandh.ir.myapplication.fragments.home_fragment.homeGRadeViewFragment;
+import mandh.ir.myapplication.fragments.bookSelect_fragment.BookSelectRecyclerViewFragment;
+import mandh.ir.myapplication.fragments.bookSelect_fragment.BookSelectGradeViewFragment;
 
 
 /**
@@ -29,12 +29,12 @@ public class PagerAdapter_homeActivity extends FragmentPagerAdapter {
 
             case 0:
                 mpage=0;
-                homeGRadeViewFragment tab1 = new homeGRadeViewFragment();
+                BookSelectGradeViewFragment tab1 = new BookSelectGradeViewFragment();
                 return tab1;
 
             case 1:
                 mpage=1;
-                HomeRecyclerViewFragment tab2 = new HomeRecyclerViewFragment();
+                BookSelectRecyclerViewFragment tab2 = new BookSelectRecyclerViewFragment();
                 return tab2;
 
 

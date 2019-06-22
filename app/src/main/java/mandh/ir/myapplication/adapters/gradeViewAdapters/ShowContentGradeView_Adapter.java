@@ -3,8 +3,6 @@ package mandh.ir.myapplication.adapters.gradeViewAdapters;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.media.MediaMetadata;
-import android.media.MediaMetadataRetriever;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,19 +11,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import mandh.ir.myapplication.activitys.MainActivity;
 import mandh.ir.myapplication.activitys.SoundListActivity;
 import mandh.ir.myapplication.activitys.MovieListActivity;
 import mandh.ir.myapplication.forHelp.G;
-import mandh.ir.myapplication.models.Model;
 import mandh.ir.myapplication.R;
-import mandh.ir.myapplication.activitys.ShowContentActivity;
 import mandh.ir.myapplication.models.ModelShowContent;
-import mandh.ir.myapplication.models.StaticsData;
-import mandh.ir.myapplication.models.VideosAndAudios;
 
 import static mandh.ir.myapplication.forHelp.G.context;
 
@@ -112,9 +106,9 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
 
         model=arrayList.get(position);
         if (model != null) {
-            try {
-            if (!model.getImageUrl().isEmpty())
-                holder.imageView.setImageResource(Integer.parseInt(model.getImageUrl()));
+
+            if (model.getImageUrl()!=0)
+                holder.imageView.setImageResource(model.getImageUrl());
 
             holder.name2.setText(model.getName());
             holder.name2.setTypeface(myTypeface);
@@ -175,9 +169,7 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
                     }
 
                 }*/
-            }catch (Exception e){
-                Toast.makeText(context,e.toString(),Toast.LENGTH_LONG).show();
-            }
+
 
             holder.cardView.setId(position);
 
@@ -190,30 +182,24 @@ public class ShowContentGradeView_Adapter extends BaseAdapter {
                     Intent intent = null;
 
                     if (id==0) {
-                        try {
-                            intent = new Intent(G.context, SoundListActivity.class);
-                            intent.putExtra("pageid", pageid);
-                            intent.putExtra("bookid",bookid);
-                        }catch (Exception e){
-                            Toast.makeText(G.context,e.toString(),Toast.LENGTH_LONG).show();
-                        }
 
+                        intent = new Intent(G.context, SoundListActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("pageid", pageid);
+                        intent.putExtra("bookid",bookid);
+                        G.context.startActivity(intent);
+                        MainActivity.getMainActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
 
 
                     }
 
                     if (id==2) {
                         intent = new Intent(G.context, MovieListActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         intent.putExtra("pageid", pageid);
                         intent.putExtra("bookid",bookid);
-                    }
-
-                    if (intent!=null) {
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
                         G.context.startActivity(intent);
-                        ShowContentActivity.getShowContentActivity().overridePendingTransition(R.anim.a_fade_in, R.anim.a_fade_out);
-
+                        MainActivity.getMainActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
 
 

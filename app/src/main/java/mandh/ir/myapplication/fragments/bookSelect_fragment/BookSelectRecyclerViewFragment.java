@@ -1,4 +1,4 @@
-package mandh.ir.myapplication.fragments.home_fragment;
+package mandh.ir.myapplication.fragments.bookSelect_fragment;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -28,7 +28,7 @@ import static mandh.ir.myapplication.forHelp.G.context;
  * Created by Dell  5559 on 25/05/2019.
  */
 
-public class HomeRecyclerViewFragment extends Fragment   {
+public class BookSelectRecyclerViewFragment extends Fragment   {
 
 
 

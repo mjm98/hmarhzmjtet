@@ -1,8 +1,5 @@
 package mandh.ir.myapplication.activitys;
 
-import android.content.pm.ActivityInfo;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -18,7 +15,7 @@ import android.widget.VideoView;
 
 import mandh.ir.myapplication.R;
 
-public class FullScreenActivity extends AppCompatActivity {
+public class FullScreenVideoActivity extends AppCompatActivity {
 
     String moveiuri;
 
@@ -87,7 +84,7 @@ public class FullScreenActivity extends AppCompatActivity {
         settingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(FullScreenActivity.this, "setting clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FullScreenVideoActivity.this, "setting clicked", Toast.LENGTH_SHORT).show();
             }
         });
 

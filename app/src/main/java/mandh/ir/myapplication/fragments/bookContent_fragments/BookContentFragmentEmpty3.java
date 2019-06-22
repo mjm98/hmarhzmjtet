@@ -1,4 +1,4 @@
-package mandh.ir.myapplication.fragments.showContent_fragments;
+package mandh.ir.myapplication.fragments.bookContent_fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,7 +12,7 @@ import mandh.ir.myapplication.R;
  * Created by Dell  5559 on 25/05/2019.
  */
 
-public class FragmentEmpty2 extends Fragment     {
+public class BookContentFragmentEmpty3 extends Fragment     {
 
 
 

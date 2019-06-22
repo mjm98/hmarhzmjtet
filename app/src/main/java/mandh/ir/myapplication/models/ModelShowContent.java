@@ -4,11 +4,12 @@ public class ModelShowContent {
 
     String number;
     String name;
-    String iconUri;
+    int iconUri=0;
 
-    public ModelShowContent(String number,String name) {
+    public ModelShowContent(String number,String name,int iconUri) {
         this.number = number;
         this.name=name;
+        this.iconUri=iconUri;
     }
 
     public String getNumber() {
@@ -18,7 +19,7 @@ public class ModelShowContent {
     public String getName() {
         return name;
     }
-    public String getImageUrl(){
-        return "";
+    public int getImageUrl(){
+        return iconUri ;
     }
 }

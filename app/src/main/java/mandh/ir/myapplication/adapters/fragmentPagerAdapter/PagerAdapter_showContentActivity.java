@@ -5,9 +5,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import mandh.ir.myapplication.fragments.showContent_fragments.FragmentEmpty2;
-import mandh.ir.myapplication.fragments.showContent_fragments.FragmentEmpty3;
-import mandh.ir.myapplication.fragments.showContent_fragments.ShowContentMainFragment;
+import mandh.ir.myapplication.fragments.bookContent_fragments.BookContentFragmentEmpty2;
+import mandh.ir.myapplication.fragments.bookContent_fragments.BookContentFragmentEmpty3;
+import mandh.ir.myapplication.fragments.bookContent_fragments.BookContentMainFragment;
 
 
 /**
@@ -33,17 +33,17 @@ public class PagerAdapter_showContentActivity extends FragmentPagerAdapter {
 
             case 0:
                 mpage=0;
-                ShowContentMainFragment tab1 = newInstance(bookid);
+                BookContentMainFragment tab1 = newInstance(bookid);
                 return tab1;
 
             case 1:
                 mpage=1;
-                FragmentEmpty2 tab2 = new FragmentEmpty2();
+                BookContentFragmentEmpty2 tab2 = new BookContentFragmentEmpty2();
                 return tab2;
 
             case 2:
                 mpage=2;
-                FragmentEmpty3 tab3 = new FragmentEmpty3();
+                BookContentFragmentEmpty3 tab3 = new BookContentFragmentEmpty3();
                 return tab3;
 
 
@@ -59,8 +59,8 @@ public class PagerAdapter_showContentActivity extends FragmentPagerAdapter {
     }
 
 
-    public static ShowContentMainFragment newInstance(int someInt) {
-        ShowContentMainFragment myFragment = new ShowContentMainFragment();
+    public static BookContentMainFragment newInstance(int someInt) {
+        BookContentMainFragment myFragment = new BookContentMainFragment();
 
         Bundle args = new Bundle();
         args.putInt("id", someInt);

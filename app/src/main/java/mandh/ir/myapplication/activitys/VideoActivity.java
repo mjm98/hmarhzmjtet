@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,9 +22,7 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import mandh.ir.myapplication.R;
-import mandh.ir.myapplication.activitys.FullScreenActivity;
 import mandh.ir.myapplication.adapters.recyclerViewAdapters.SimilarVideoRecyclerAdapter;
-import mandh.ir.myapplication.forHelp.G;
 
 import static mandh.ir.myapplication.forHelp.G.context;
 
@@ -39,7 +34,7 @@ public class VideoActivity extends Activity {
     SimilarVideoRecyclerAdapter adapter;
     RecyclerView recyclerView;
     TextView vidsTitle;
-    TextView title;
+    TextView titleTx;
     TextView descriptionTxt;
     TextView dateTx;
     VideoView videoView;
@@ -65,8 +60,9 @@ public class VideoActivity extends Activity {
     int pageId;
     int videoId;
     ImageView videoPreview;
+    String title;
     ImageView settingBtn;
-
+    Bitmap bitmap;
 
 
 
@@ -76,7 +72,7 @@ public class VideoActivity extends Activity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_video);
-        try {
+
 
 
             cast();
@@ -90,6 +86,7 @@ public class VideoActivity extends Activity {
                 bookId = extras.getInt("bookId");
                 pageId = extras.getInt("pageId");
                 videoId = extras.getInt("videoId");
+                title=extras.getString("title");
 
             }
 
@@ -99,17 +96,19 @@ public class VideoActivity extends Activity {
             Uri videoURI = Uri.parse(path);
             MediaMetadataRetriever retriever = new MediaMetadataRetriever();
             retriever.setDataSource(this, videoURI);
-            Bitmap bitmap = retriever
-                    .getFrameAtTime(100000, MediaMetadataRetriever.OPTION_PREVIOUS_SYNC);
+            bitmap = retriever
+                    .getFrameAtTime(1, MediaMetadataRetriever.OPTION_PREVIOUS_SYNC);
 
 
-            Drawable drawable = new BitmapDrawable(getResources(), bitmap);
-            videoPreview.setImageDrawable(drawable);
+            videoPreview.setImageBitmap(bitmap);
+            retriever.release();
 
+
+            descriptionTxt.setText(description);
+            titleTx.setText(title);
 
             setTYpeFaces();
 
-            setBottomTabLayout();
 
             setRecycler();
 
@@ -161,7 +160,11 @@ public class VideoActivity extends Activity {
                         isVideoPlaying = false;
 
                     } else {
+
                         videoPreview.setVisibility(View.INVISIBLE);
+                        videoPreview.setImageBitmap(null);
+                        bitmap.recycle();
+
                         isVideoPlaying = true;
                         play.setImageDrawable(getResources().getDrawable(R.drawable.h_pause));
                         pauseImage.setVisibility(View.GONE);
@@ -189,7 +192,7 @@ public class VideoActivity extends Activity {
                 public void onClick(View view) {
                     vidTime = videoView.getCurrentPosition();
                     videoView.pause();
-                    Intent i = new Intent(VideoActivity.this, FullScreenActivity.class);
+                    Intent i = new Intent(VideoActivity.this, FullScreenVideoActivity.class);
                     i.putExtra("videoUri", path);
                     i.putExtra("isVideoPlaying", isVideoPlaying);
                     startActivity(i);
@@ -219,9 +222,6 @@ public class VideoActivity extends Activity {
             });
 
 
-        }catch (Exception e){
-            Toast.makeText(G.context, e.toString(), Toast.LENGTH_LONG).show();
-        }
 
     }
 
@@ -275,7 +275,7 @@ public class VideoActivity extends Activity {
         Typeface myTypeface = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileBold.ttf");
         Typeface myTypeface2 = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileMedium.ttf");
 
-        title.setTypeface(myTypeface);
+        titleTx.setTypeface(myTypeface);
         descriptionTxt.setTypeface(myTypeface2);
         vidsTitle.setTypeface(myTypeface);
         dateTx.setTypeface(myTypeface);
@@ -293,7 +293,7 @@ public class VideoActivity extends Activity {
         bottomTabLayout = (TabLayout) findViewById(R.id.tab);
         searchEtx = (EditText) findViewById(R.id.edit_text);
         vidsTitle =(TextView) findViewById(R.id.vids_title);
-        title = (TextView) findViewById(R.id.title);
+        titleTx = (TextView) findViewById(R.id.title);
         descriptionTxt =(TextView) findViewById(R.id.description);
         dateTx =(TextView) findViewById(R.id.date);
         videoView=(VideoView)findViewById(R.id.video2);
@@ -321,86 +321,7 @@ public class VideoActivity extends Activity {
     }
 
 
-    private void setBottomTabLayout() {
 
-
-        //create tabs
-        bottomTabLayout.addTab(bottomTabLayout.newTab());
-        bottomTabLayout.addTab(bottomTabLayout.newTab());
-        bottomTabLayout.addTab(bottomTabLayout.newTab());
-        bottomTabLayout.addTab(bottomTabLayout.newTab());
-        bottomTabLayout.addTab(bottomTabLayout.newTab());
-
-        Typeface myTypeface = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileMedium.ttf");
-
-        //.......................create custom Views and add them to bottomTabLayout.......................
-
-        View view1 = View.inflate(this, R.layout.custom_view_tab_layout_disable, null);
-        TextView title = (TextView) view1.findViewById(R.id.title);
-        title.setText("تنظیمات");
-        title.setTypeface(myTypeface);
-
-        bottomTabLayout.getTabAt(0).setCustomView(null);
-        bottomTabLayout.getTabAt(0).setCustomView(view1);
-
-
-        View view2 = View.inflate(this, R.layout.custom_view_tab_layout_disable, null);
-        TextView title2 = (TextView) view2.findViewById(R.id.title);
-        title2.setText("شبکه علمی");
-        title2.setTypeface(myTypeface);
-
-        bottomTabLayout.getTabAt(1).setCustomView(null);
-        bottomTabLayout.getTabAt(1).setCustomView(view2);
-
-
-
-        View view3 = View.inflate(this, R.layout.custom_view_tab_layout_enable, null);
-
-        TextView title3 = (TextView) view3.findViewById(R.id.title);
-        title3.setText("خانه");
-        title3.setTypeface(myTypeface);
-
-        bottomTabLayout.getTabAt(2).setCustomView(null);
-        bottomTabLayout.getTabAt(2).setCustomView(view3);
-
-
-
-        View view4 = View.inflate(this, R.layout.custom_view_tab_layout_disable, null);
-        TextView title4 = (TextView) view4.findViewById(R.id.title);
-        title4.setText("چالش ها");
-        title4.setTypeface(myTypeface);
-
-        bottomTabLayout.getTabAt(3).setCustomView(null);
-        bottomTabLayout.getTabAt(3).setCustomView(view4);
-
-
-
-        View view5 = View.inflate(this, R.layout.custom_view_tab_layout_disable, null);
-        TextView title5 = (TextView) view5.findViewById(R.id.title);
-        title5.setText("پروفایل");
-        title5.setTypeface(myTypeface);
-
-        bottomTabLayout.getTabAt(4).setCustomView(null);
-        bottomTabLayout.getTabAt(4).setCustomView(view5);
-
-        bottomTabLayout.getTabAt(2).select();
-
-
-        //..........................................................................................
-
-        bottomTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-
-                //viewPager.setCurrentItem(tab.getPosition());
-            }
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {}
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {}
-        });
-
-    }
 
     @Override
     protected void onPause() {
@@ -435,6 +356,7 @@ public class VideoActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
         isVideoPlaying=false;
+        videoView.suspend();
         vidTime=0;
     }
 
@@ -442,7 +364,10 @@ public class VideoActivity extends Activity {
     public void onBackPressed() {
         super.onBackPressed();
         isVideoPlaying=false;
+        videoView.suspend();
         finish();
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+
     }
 
 

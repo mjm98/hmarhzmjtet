@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="mandh.ir.myapplication.activitys.MainActivity">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#fa4059"
+        android:layout_alignParentBottom="true"
+        />
+
+    <LinearLayout
+        android:layout_above="@+id/tab"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <mandh.ir.myapplication.forHelp.NonSwipeableViewPager
+            android:layoutDirection="rtl"
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+
+    </LinearLayout>
+
+
+
+    <android.support.design.widget.TabLayout
+        android:transitionName="tr"
+        android:background="@drawable/frame"
+        app:tabIndicatorColor="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:id="@+id/tab"
+        >
+
+
+
+    </android.support.design.widget.TabLayout>
+
+</RelativeLayout>

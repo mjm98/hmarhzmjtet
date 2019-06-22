@@ -25,20 +25,37 @@
         android:elevation="5dp">
 
 
-        <ImageView
-            android:id="@+id/image3"
+        <RelativeLayout
+            android:id="@+id/img_layout"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:src="@drawable/vid" />
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginRight="10dp">
+
+            <ImageView
+                android:id="@+id/image3"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:layout_width="match_parent"
+                android:src="@drawable/vid" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/play_vid5"
+                />
+
+        </RelativeLayout>
+
+
 
 
             <LinearLayout
                 android:id="@+id/button_bar"
                 android:layout_alignParentLeft="true"
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -82,7 +99,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="15dp"
             android:layout_toRightOf="@id/button_bar"
-            android:layout_toLeftOf="@id/image3"
+            android:layout_toLeftOf="@id/img_layout"
             android:gravity="right"
             android:lines="1"
             android:text="عنوان ویدئو"
@@ -98,7 +115,7 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@id/button_bar"
-            android:layout_toLeftOf="@id/image3"
+            android:layout_toLeftOf="@id/img_layout"
             android:gravity="right|top"
             android:lines="2"
             android:ellipsize="end"

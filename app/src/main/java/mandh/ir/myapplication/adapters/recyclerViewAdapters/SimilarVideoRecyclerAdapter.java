@@ -11,6 +11,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -26,6 +28,7 @@ import mandh.ir.myapplication.forHelp.G;
 import mandh.ir.myapplication.models.StaticsData;
 import mandh.ir.myapplication.models.Videos;
 
+import static android.view.View.VISIBLE;
 import static mandh.ir.myapplication.forHelp.G.context;
 
 public class SimilarVideoRecyclerAdapter extends RecyclerView.Adapter<SimilarVideoRecyclerAdapter.ItemHolder>  {
@@ -38,11 +41,8 @@ public class SimilarVideoRecyclerAdapter extends RecyclerView.Adapter<SimilarVid
         this.videoid=videoid;
         this.pageid=pageid;
 
-        Toast.makeText(G.context,String.valueOf(bookid)+".."+String.valueOf(pageid)+".."+String.valueOf(videoid),Toast.LENGTH_LONG).show();
 
 
-
-        Handler handler=new Handler();
         int x=0;
 
         if(pageid==-1){
@@ -60,15 +60,9 @@ public class SimilarVideoRecyclerAdapter extends RecyclerView.Adapter<SimilarVid
         }
         for(int i=0;i<videoList.size();i++){
             bitmaps.add(null);}
-        Runnable runnable=new Runnable() {
-            @Override
-            public void run() {
-                SetPics setPics=new SetPics();
-                setPics.execute();
-            }
-        };
 
-        handler.post(runnable);
+
+
 
            // Toast.makeText(G.context,String.valueOf(pageid),Toast.LENGTH_LONG).show();
 
@@ -84,24 +78,21 @@ public class SimilarVideoRecyclerAdapter extends RecyclerView.Adapter<SimilarVid
     public void onBindViewHolder(ItemHolder holder, final int position) {
 
         holder.videoTitle.setText(videoList.get(position).getName());
-        Bitmap bmp=null;
-        if(bitmaps.get(position)!=null){
-            bmp=bitmaps.get(position);
-            if(bmp!=null){
-                holder.videImage.setImageBitmap(bmp);
-            }
-        }
+
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(G.context, VideoActivity.class);
-                i.putExtra("pageId", pageid);
-                i.putExtra("bookId",bookid);
-                i.putExtra("videoId", list.get(videoList.get(position).getId()).getId());
+            /*    Intent i=new Intent(G.context, VideoActivity.class);
+                i.putExtra("pageid", pageid);
+                i.putExtra("bookid",bookid);
+                i.putExtra("videoId", videoid);
                 i.putExtra("path", list.get(videoList.get(position).getId()).getUri());
                 i.putExtra("description", list.get(videoList.get(position).getId()).getDiscription());
                 i.putExtra("videoName",list.get(videoList.get(position).getId()).getName());
                 G.context.startActivity(i);
+                */
+
+                Toast.makeText(G.context, " Similar Video clicked", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -127,31 +118,5 @@ public class SimilarVideoRecyclerAdapter extends RecyclerView.Adapter<SimilarVid
 
             }
     }
-    private class SetPics extends AsyncTask<ImageView,Bitmap,Bitmap> {
 
-
-        @Override
-        protected void onPostExecute(Bitmap bitmap) {
-            super.onPostExecute(bitmap);
-
-            SimilarVideoRecyclerAdapter.this.notifyDataSetChanged();
-        }
-
-        @Override
-        protected Bitmap doInBackground(ImageView... imageViews) {
-            for(int i=0;i<videoList.size();i++){
-                Uri videoURI = Uri.parse("android.resource://" + G.context.getPackageName() +"/"
-                        +videoList.get(i).getUri());
-                MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-                retriever.setDataSource(G.context, videoURI);
-                Bitmap bitmap = retriever
-                        .getFrameAtTime(100000,MediaMetadataRetriever.OPTION_PREVIOUS_SYNC);
-                bitmaps.set(i,bitmap);
-                //SimilarVideoRecyclerAdapter.this.notifyItemChanged(i);
-
-            }
-
-            return null;
-        }
-    }
 }

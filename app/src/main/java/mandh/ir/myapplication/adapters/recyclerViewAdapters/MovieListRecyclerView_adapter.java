@@ -14,6 +14,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -29,6 +31,7 @@ import mandh.ir.myapplication.R;
 import mandh.ir.myapplication.models.Videos;
 import mandh.ir.myapplication.models.VideosAndAudios;
 
+import static android.view.View.VISIBLE;
 import static mandh.ir.myapplication.forHelp.G.context;
 
 
@@ -44,6 +47,8 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
     int pageid=1;
     int videoid=0;
     ArrayList<Bitmap> bitmaps=new ArrayList<>();
+    private boolean onBind;
+
 
     //..............................................................................................
     private ArrayList<Videos> arrayList = new ArrayList<>();
@@ -128,14 +133,17 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
                 public void onClick(View v) {
                     videoid = position;
                    Intent intent = new Intent(G.context, VideoActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     intent.putExtra("bookId", bookid);
                     intent.putExtra("pageId", pageid);
                     intent.putExtra("videoId", videoid);
+                    intent.putExtra("title", model.getName());
                     intent.putExtra("path", arrayList.get(position).getUri());
                     intent.putExtra("description", arrayList.get(position).getDiscription());
                     intent.putExtra("videoName",arrayList.get(position).getName());
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     G.context.startActivity(intent);
+                    MovieListActivity.getMovieListActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
                 }
             });
@@ -188,9 +196,12 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
                 MediaMetadataRetriever retriever = new MediaMetadataRetriever();
                 retriever.setDataSource(G.context, videoURI);
                 Bitmap bitmap = retriever
-                        .getFrameAtTime(100000,MediaMetadataRetriever.OPTION_PREVIOUS_SYNC);
+                        .getFrameAtTime(1,MediaMetadataRetriever.METADATA_KEY_ALBUM );
                 bitmaps.set(i,bitmap);
+
+
                 MovieListRecyclerView_adapter.this.notifyItemChanged(i);
+
 
             }
 

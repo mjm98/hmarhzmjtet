@@ -12,6 +12,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -24,6 +26,7 @@ import mandh.ir.myapplication.models.SoundModel;
 import mandh.ir.myapplication.R;
 import mandh.ir.myapplication.models.VideosAndAudios;
 
+import static android.view.View.VISIBLE;
 import static mandh.ir.myapplication.forHelp.G.context;
 
 public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundListRecyclerView_adapter.RecViewHolder> {
@@ -37,6 +40,7 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
     Handler handler;
     Runnable runnable;
 
+    private int lastPosition = -1;
 
 
     public SoundListRecyclerView_adapter(VideosAndAudios list,Context context) {
@@ -61,7 +65,9 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
     public void onBindViewHolder(final RecViewHolder holder, final int position) {
         final boolean currentViewExpanded = expandList.get(position);
 
+
         holder.bind(currentViewExpanded);
+
 
         Typeface myTypeface = Typeface.createFromAsset(context.getAssets(), "font/IRANYekanMobileMedium.ttf");
         holder.time.setTypeface(myTypeface);
@@ -78,7 +84,6 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
             mmr.release();
 
         int time=Integer.valueOf(durationStr);*/
-
 
         holder.time.setText(list.getVoices().get(position).getDuration());
 
@@ -249,33 +254,14 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
         private void bind(boolean movie) {
             boolean expand = movie;
 
-            subItem.setVisibility(expand ? View.VISIBLE : View.GONE);
-
-
-        }
-
-
-
-
-
-        //fade out animation............................................................................
-        private void fadeOut(final View view) {
-
-
-            view.animate()
-                    .setDuration(200)
-                    .translationY(view.getY()+70)
-                    .alpha(0.0f)
-                    .setListener(new AnimatorListenerAdapter() {
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-                            super.onAnimationEnd(animation);
-                            view.setVisibility(View.GONE);
-                        }
-                    });
-
+            subItem.setVisibility(expand ? VISIBLE : View.GONE);
 
         }
+
+
+
+
+
     }
 
 
