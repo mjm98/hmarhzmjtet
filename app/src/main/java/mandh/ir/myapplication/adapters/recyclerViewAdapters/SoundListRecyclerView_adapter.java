@@ -39,6 +39,7 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
     boolean isTouching=false;
     Handler handler;
     Runnable runnable;
+    boolean isPlaying=false;
 
     private int lastPosition = -1;
 
@@ -129,18 +130,19 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
     }
 
     private void playBtnFun(final RecViewHolder holder, final int postion){
-        holder.playbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               
-                player.start();
-            }
-        });
+
 
         holder.pausebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                player.pause();
+                if(isPlaying){
+                    player.pause();
+                    holder.pausebtn.setImageDrawable(G.context.getDrawable(R.drawable.paly));
+                }else {
+                    player.start();
+                    holder.pausebtn.setImageDrawable(G.context.getDrawable(R.drawable.pouse));
+                }
+
             }
         });
     }
@@ -155,7 +157,9 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
             player.release();
             player=MediaPlayer.create(context,Integer.valueOf(list.getVoices().get(position).getUri()));}
 
-           // player.start();
+            player.start();
+            holder.pausebtn.setImageDrawable(G.context.getDrawable(R.drawable.pouse));
+            isPlaying=true;
             holder.seekBar.setMax(player.getDuration());
             holder.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
@@ -198,8 +202,6 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
 
 
 
-
-
     }
 
     public String getTime(int time){
@@ -235,7 +237,8 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
         private TextView date;
         private View subItem;
         private SeekBar seekBar;
-        ImageView playbtn,pausebtn;
+        ImageView pausebtn;
+        TextView start,finish;
 
 
         public RecViewHolder(View itemView) {
@@ -246,8 +249,9 @@ public class SoundListRecyclerView_adapter extends RecyclerView.Adapter<SoundLis
             date = itemView.findViewById(R.id.date);
             subItem = itemView.findViewById(R.id.sub_item);
             seekBar=itemView.findViewById(R.id.seekBar2);
-            playbtn=itemView.findViewById(R.id.playsound_model);
             pausebtn=itemView.findViewById(R.id.puasesound_model);
+            start=itemView.findViewById(R.id.start2);
+            finish=itemView.findViewById(R.id.finish2);
 
         }
 

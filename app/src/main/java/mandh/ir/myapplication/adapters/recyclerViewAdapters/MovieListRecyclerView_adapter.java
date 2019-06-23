@@ -46,6 +46,7 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
     int bookid=0;
     int pageid=1;
     int videoid=0;
+    RecyclerView recyclerView;
     ArrayList<Bitmap> bitmaps=new ArrayList<>();
     private boolean onBind;
 
@@ -59,12 +60,15 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
 
 
     //constructor
-    public MovieListRecyclerView_adapter(VideosAndAudios list,int bookid,int pageid ) {
+    public MovieListRecyclerView_adapter(VideosAndAudios list,int bookid,int pageid ,RecyclerView recyclerView) {
         this.bookid=bookid;
+        this.recyclerView=recyclerView;
         this.pageid=pageid;
         this.arrayList =list.getVideos();
-        for(int i=0;i<arrayList.size();i++)
+        for(int i=0;i<arrayList.size();i++){
             bitmaps.add(null);
+
+        }
         Handler handler=new Handler();
         Runnable runnable=new Runnable() {
             @Override
@@ -93,6 +97,7 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
 
        final Uri  videoURI = Uri.parse("android.resource://" + G.context.getPackageName() +"/"
                 +arrayList.get(position).getUri());
+
         /*MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         retriever.setDataSource(G.context, videoURI);
         Bitmap bitmap = retriever
@@ -185,7 +190,7 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
 
-            MovieListRecyclerView_adapter.this.notifyDataSetChanged();
+           // MovieListRecyclerView_adapter.this.notifyDataSetChanged();
         }
 
         @Override
@@ -200,7 +205,15 @@ public class MovieListRecyclerView_adapter extends RecyclerView.Adapter<MovieLis
                 bitmaps.set(i,bitmap);
 
 
-                MovieListRecyclerView_adapter.this.notifyItemChanged(i);
+
+                        do{try{
+                            Thread.sleep(10);}catch (Exception e){}
+                        }while (recyclerView.getScrollState()!=RecyclerView.SCROLL_STATE_IDLE);
+                        if(recyclerView.getScrollState()==RecyclerView.SCROLL_STATE_IDLE)
+                            MovieListRecyclerView_adapter.this.notifyItemChanged(i);
+
+
+                   // }
 
 
             }

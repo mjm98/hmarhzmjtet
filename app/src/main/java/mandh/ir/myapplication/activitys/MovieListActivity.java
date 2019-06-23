@@ -105,13 +105,14 @@ public class MovieListActivity extends Activity {
         Intent i=new Intent(MovieListActivity.this,VideoActivity.class);
 
         if(pageid!=-1) {
-            adapter = new MovieListRecyclerView_adapter((VideosAndAudios) StaticsData.makeData().get(bookid).getPages().get(pageid), bookid, pageid);
+            adapter = new MovieListRecyclerView_adapter((VideosAndAudios) StaticsData.makeData().get(bookid).getPages().get(pageid), bookid, pageid,recyclerView);
 
         }else{
-            adapter = new MovieListRecyclerView_adapter((VideosAndAudios)StaticsData.makeData().get(bookid),bookid,pageid);}
+            adapter = new MovieListRecyclerView_adapter((VideosAndAudios)StaticsData.makeData().get(bookid),bookid,pageid,recyclerView);}
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
+
 
     }
 
@@ -182,6 +183,7 @@ public class MovieListActivity extends Activity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        finish();
 
     }
 

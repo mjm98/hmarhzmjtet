@@ -108,6 +108,15 @@ public class StaticsData {
         videos.add(vp1);
         videos.add(vp2);
         videos.add(vp3);
+        videos.add(new Videos(String.valueOf(R.raw.video4),"اموزش توابع","اموزش توابع متناوب و و مسابل مربوط به انها ",2));
+        videos.add(new Videos(String.valueOf(R.raw.video2),"اموزش ایفون","اموزش مقدماتی کار با گوشی ایفون و فنون استفاده از ان با استفاده از برنامه های مختلف",1));
+        videos.add(new Videos(String.valueOf(R.raw.video4),"اموزش توابع","اموزش توابع متناوب و و مسابل مربوط به انها ",2));
+        videos.add(new Videos(String.valueOf(R.raw.video2),"اموزش ایفون","اموزش مقدماتی کار با گوشی ایفون و فنون استفاده از ان با استفاده از برنامه های مختلف",1));
+        videos.add(new Videos(String.valueOf(R.raw.video4),"اموزش توابع","اموزش توابع متناوب و و مسابل مربوط به انها ",2));
+        videos.add(new Videos(String.valueOf(R.raw.video2),"اموزش ایفون","اموزش مقدماتی کار با گوشی ایفون و فنون استفاده از ان با استفاده از برنامه های مختلف",1));
+        videos.add(new Videos(String.valueOf(R.raw.video4),"اموزش توابع","اموزش توابع متناوب و و مسابل مربوط به انها ",2));
+        videos.add(new Videos(String.valueOf(R.raw.video2),"اموزش ایفون","اموزش مقدماتی کار با گوشی ایفون و فنون استفاده از ان با استفاده از برنامه های مختلف",1));
+
 
         ArrayList<Audios> audios=new ArrayList<>();
         Integer a=R.raw.b1;
