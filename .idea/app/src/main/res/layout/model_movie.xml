@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="#f9f6ec"
+    app:cardCornerRadius="5dp"
+    android:elevation="10dp"
+    app:cardElevation="5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginBottom="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:id="@+id/movie_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="70dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:elevation="5dp">
+
+
+        <RelativeLayout
+            android:id="@+id/img_layout"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginRight="10dp">
+
+            <ImageView
+                android:id="@+id/image3"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:layout_width="match_parent"
+                android:src="@drawable/vid" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/play_vid5"
+                />
+
+        </RelativeLayout>
+
+
+
+
+            <LinearLayout
+                android:id="@+id/button_bar"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="15dp"
+                android:layoutDirection="ltr"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="13dp"
+                    android:layout_height="13dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/tag" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/fav" />
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/download" />
+
+
+            </LinearLayout>
+
+
+
+
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_toRightOf="@id/button_bar"
+            android:layout_toLeftOf="@id/img_layout"
+            android:gravity="right"
+            android:lines="1"
+            android:text="عنوان ویدئو"
+            android:textColor="#3e36cd"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/title"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/button_bar"
+            android:layout_toLeftOf="@id/img_layout"
+            android:gravity="right|top"
+            android:lines="2"
+            android:ellipsize="end"
+            android:lineSpacingExtra="5dp"
+            android:text="افشار با بیان اینکه بزرگترها فقط باید هدایتگر و پشتیبان جوانان باشند و تجربه گذشته را منتقل کنند، گفت: کسانی که به این موضوع اعتقاد ندارند، دو دسته اند: اول کسانی که نگران بازنشستگی اند و حاضر نیستند نسل پشت سرشان جایگزین شوند و دوم جوانانی که هنوز قدرت و توانایی خود را باور نکرده اند که حتما باید این کار را بکنند. ایران ما بدست جوانان قدرتمندمان ساخته خواهد شد."
+            android:textColor="#3e36cd"
+            android:textSize="8dp" />
+
+
+
+
+
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
+

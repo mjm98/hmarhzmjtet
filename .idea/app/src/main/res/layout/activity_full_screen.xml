@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:background="#000"
+    android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <VideoView
+        android:layout_above="@+id/controller"
+        android:id="@+id/video"
+        android:foregroundGravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    <ImageView
+        android:id="@+id/pause_image"
+        android:background="#13616161"
+        android:src="@drawable/play_vid2"
+        android:clickable="true"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <View
+        android:visibility="visible"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/clickable_view"
+        />
+
+    <include
+        layout="@layout/landscape_media_controller" />
+
+
+</RelativeLayout>
+
+

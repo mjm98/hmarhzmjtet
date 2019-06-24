@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:background="#fff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="mandh.ir.myapplication.fragments.bookSelect_fragment.Parent_BookSelectFragment">
+
+
+
+
+    <RelativeLayout
+        android:id="@+id/search_layout"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/frame_untouch"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/search"
+            />
+
+        <EditText
+            android:id="@+id/edit_text"
+            android:textColorHint="#f93f59"
+            android:background="@android:color/transparent"
+            android:textSize="14dp"
+            android:hint="اینجا جستجو کن"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="5dp"
+            android:gravity="center_vertical|right"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:lines="1"
+            android:singleLine="true"
+            android:layout_toRightOf="@+id/icon"
+            />
+
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:background="#000"
+        android:id="@+id/vid_layout"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:layout_below="@+id/search_layout"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground">
+
+
+        <VideoView
+            android:layout_above="@+id/controller"
+            android:id="@+id/video2"
+            android:foregroundGravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <ImageView
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:id="@+id/video_preview"
+            />
+
+        <ImageView
+            android:id="@+id/pause_image"
+            android:background="#13616161"
+            android:src="@drawable/play_vid2"
+            android:clickable="true"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:visibility="gone"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/clickable_view"
+            />
+
+        <include
+            layout="@layout/media_controller" />
+
+
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/vid_layout"
+        android:layout_above="@+id/tab"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+            <RelativeLayout
+                android:id="@+id/title_layout"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_centerVertical="true"
+                    android:id="@+id/button_bar"
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:orientation="horizontal"
+                    android:layoutDirection="ltr"
+                    >
+
+
+                    <ImageView
+                        android:id="@+id/downloadBtn"
+                        android:src="@drawable/r_download"
+                        android:layout_weight="1"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp" />
+
+                    <ImageView
+                        android:id="@+id/favBtn"
+                        android:layout_marginLeft="7dp"
+                        android:src="@drawable/r_fav"
+                        android:layout_weight="1"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp" />
+
+                    <ImageView
+                        android:id="@+id/tagBtn"
+                        android:layout_marginLeft="7dp"
+                        android:src="@drawable/r_tag"
+                        android:layout_weight="1"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_centerVertical="true"
+
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@id/button_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 27 خرداد 98"
+                    android:textSize="13dp"
+                    android:textColor="#fdd30f"
+                    android:id="@+id/date"
+                    />
+
+
+                <TextView
+                    android:layout_centerVertical="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:textSize="18dp"
+                    android:text="عنوان ویدئو"
+                    android:textColor="#2018ad"
+                    android:layout_toRightOf="@id/date"
+                    android:id="@+id/title"
+                    />
+
+            </RelativeLayout>
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/title_layout"
+                android:id="@+id/description"
+                android:textSize="13dp"
+                android:textColor="#2018ad"
+                android:lineSpacingExtra="5dp"
+                android:gravity="top|right"
+                android:text="داستان کوتاه گونه‌ای از ادبیات داستانی است که نسبت به رمان یا داستان بلند حجم کم‌تری دارد و نویسنده در آن برشی از زندگی یا حوادث را می‌نویسد درحالی که در داستان بلند یا رمان، نویسنده به جنبه‌های مختلف زندگی یک یا چند شخصیت می‌پردازد و دستش برای استفاده از کلمات باز است. به همین دلیل ایجاز در داستان کوتاه مهم است و نویسنده نباید به موارد حاشیه‌ای بپردازد."
+                />
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/description"
+                android:id="@+id/vids_title"
+                android:textSize="18dp"
+                android:textColor="#2018ad"
+                android:text="سایر ویدئو ها / ویدئو های مشابه"
+                />
+
+            <LinearLayout
+                android:gravity="right"
+                android:layoutDirection="rtl"
+                android:layout_below="@id/vids_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                >
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/similarvideorecycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:paddingRight="20dp"
+                    android:paddingLeft="20dp"
+                    android:clipToPadding="false"
+                    android:layout_marginHorizontal="20dp"
+                    android:layoutDirection="rtl"
+                    android:textDirection="rtl"
+                    android:layout_gravity="right"
+                    android:foregroundGravity="right"
+                    />
+
+
+            </LinearLayout>
+
+
+
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>
